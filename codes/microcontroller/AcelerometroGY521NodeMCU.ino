@@ -1,3 +1,6 @@
+/* 
+Código de leitura de dados de um acelerômetro usando NodeMCU e enviando em OSC.
+*/
 
 #include <ESP8266WiFi.h> //INCLUSÃO DA BIBLIOTECA NECESSÁRIA PARA FUNCIONAMENTO DO CÓDIGO
 #include <WiFiUdp.h>
