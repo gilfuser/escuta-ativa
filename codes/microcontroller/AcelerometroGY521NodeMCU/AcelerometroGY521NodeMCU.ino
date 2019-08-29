@@ -10,7 +10,7 @@ const char* ssid = "NET_2.4G_Comunidade azul"; //VARIÁVEL QUE ARMAZENA O NOME D
 const char* password = "dunadeareia"; //VARIÁVEL QUE ARMAZENA A SENHA DA REDE SEM FIO EM QUE VAI CONECTAR
 
 WiFiUDP Udp;                                // A UDP instance to let us send and receive packets over UDP
-const IPAddress outIp(192,168,0,14);        // remote IP of your computer
+const IPAddress outIp(192,168,0,4);        // remote IP of your computer
 const unsigned int outPort = 57120;         // remote port to receive OSC
 //const unsigned int localPort = 8888;      // local port to listen for OSC packets (actually not used for sending)
 
@@ -72,7 +72,7 @@ void setup() {
     //Udp.begin(localPort);
     //Serial.print("Local port: ");
     //Serial.println(Udp.localPort());
-    delay(20000);
+    delay(2000);
 }
 
 void loop() {
