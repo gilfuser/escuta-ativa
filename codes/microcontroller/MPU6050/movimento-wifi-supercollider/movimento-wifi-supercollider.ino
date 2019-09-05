@@ -96,6 +96,10 @@ void dmpDataReady() {
 
 void mpu_setup()
 {
+
+  znew = 0;
+  zold = 0;
+  
   Wire.begin(2, 0);
   Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
 
