@@ -15,3 +15,4 @@ q.vejasom.size = 600;
 q.vejasom.style = 2;
 q.vejasom.xZoom = 2;
 q.vejasom.yZoom = 2;
+Ndef(\saaw).play;
