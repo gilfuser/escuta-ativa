@@ -11,6 +11,7 @@ s.waitForBoot({
 	0.1.wait;
 	s.sync;
 	"Sons/saaw*".loadRelative;
+	"grava-movimento*".loadRelative;
 	0.1.wait;
 	s.sync;
 	"Comunicacao/entre-movimento-e-som*".loadRelative;

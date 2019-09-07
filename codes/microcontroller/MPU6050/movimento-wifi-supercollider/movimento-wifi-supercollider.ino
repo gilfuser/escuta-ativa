@@ -59,8 +59,8 @@ VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measur
 VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
 VectorFloat gravity;    // [x, y, z]            gravity vector
 
-const char* ssid = "NET_2.4G_Comunidade azul"; //VARIÁVEL QUE ARMAZENA O NOME DA REDE SEM FIO EM QUE VAI CONECTAR
-const char* password = "dunadeareia"; //VARIÁVEL QUE ARMAZENA A SENHA DA REDE SEM FIO EM QUE VAI CONECTAR
+const char* ssid = "iPhone de Daniel"; //VARIÁVEL QUE ARMAZENA O NOME DA REDE SEM FIO EM QUE VAI CONECTAR
+const char* password = "wv6ejzhubryyo"; //VARIÁVEL QUE ARMAZENA A SENHA DA REDE SEM FIO EM QUE VAI CONECTAR
 
 #define OUTPUT_READABLE_YAWPITCHROLL
 
@@ -75,7 +75,7 @@ float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gra
 const char DEVICE_NAME[] = "mpu6050";
 
 WiFiUDP Udp;                                // A UDP instance to let us send and receive packets over UDP
-const IPAddress outIp(192, 168, 0, 4);      // remote IP of your computer
+const IPAddress outIp(172, 20, 10, 2);      // remote IP of your computer
 const unsigned int outPort = 57120;         // remote port to receive OSC
 //const unsigned int localPort = 8888;      // local port to listen for OSC packets (actually not used for sending)
 
@@ -96,9 +96,6 @@ void dmpDataReady() {
 
 void mpu_setup()
 {
-
-  znew = 0;
-  zold = 0;
   
   Wire.begin(2, 0);
   Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
