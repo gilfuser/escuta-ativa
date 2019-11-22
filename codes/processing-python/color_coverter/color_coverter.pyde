@@ -13,13 +13,7 @@ def draw():
     c0, c1, c2 = coresA[3], coresA[4], coresA[5]
     fill(*triangulo(c0, c1, c2, mouseX))
     circle(180, 180, 360)
-    
-def lerpC(r0, g0, b0, r1, g1, b1, t):
-    r = lerp(r0, r1, t)
-    g = lerp(g0, g1, t)
-    b = lerp(b0, b1, t)
-    return (r, g, b)
-    
+   
 def triangulo(a, b, c, v):
     ra, ga, ba = a
     rb, gb, bv = b
@@ -40,8 +34,12 @@ def triangulo(a, b, c, v):
     if 300 <= v < 360:
         t = map(v, 300, 360, 0, 1)
         return lerpC(rc, gc, bc, ra, ga, ba, t)
-        
-    
+
+def lerpC(r0, g0, b0, r1, g1, b1, t):
+    r = lerp(r0, r1, t)
+    g = lerp(g0, g1, t)
+    b = lerp(b0, b1, t)
+    return (r, g, b)
     
     # novas = []
     # for c in coresC:
