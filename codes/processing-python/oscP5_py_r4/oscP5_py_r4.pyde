@@ -30,7 +30,6 @@ def oscEvent(theOscMessage):
                 dados[chave] = theOscMessage.get(0).intValue()
                 print(chave, dados[chave])
      
-
 def read_dados(instrumento, num_tipo):
     chave = tipos[num_tipo].format(instrumento)
     return dados[chave]
