@@ -11,7 +11,7 @@ def draw():
     background(0)
     translate(0, height / 2)
     for instrumento in instrumentos:
-        tom, amp, cor, ins = read_dados(instrumento)
+        tom, amp, cor, ins = dados[instrumento]
         colorMode(HSB)
         fill(cor % 255, 255, 255, 100)
         if ins:
@@ -20,21 +20,18 @@ def draw():
             square(tom, 0, amp)
         
 def oscEvent(theOscMessage):
+    # print theOscMessage
     for instrumento in instrumentos:   
-        for tipo in tipos: 
-            chave = tipo.format(instrumento)
-            if theOscMessage.addrPattern() == chave:
-                dados[chave] = theOscMessage.get(0).intValue()
-                print(chave, dados[chave])
+            if theOscMessage and theOscMessage.addrPattern() == "/"+ instrumento:
+                ins = theOscMessage.get(0).intValue() if theOscMessage.get(0) else 0
+                tom = theOscMessage.get(1).intValue() if theOscMessage.get(1) else 0
+                amp = theOscMessage.get(2).intValue() if theOscMessage.get(2) else 0
+                cor = theOscMessage.get(3).intValue() if theOscMessage.get(3) else 0               
+                dados[instrumento] = (ins, tom, amp, cor)
+                # print(instrumento, dados[instrumento])
      
-def read_dados(instrumento):
-    result = []
-    for i in range(4):
-        result.append(dados[tipos[i].format(instrumento)])
-    return result
-
 def setup_dados():
-    global dados, instrumentos, tipos, oscP5
+    global dados, instrumentos, oscP5
     oscP5 = OscP5(this, 12000)
     dados = dict()
     instrumentos = ("verdesol",
@@ -42,11 +39,8 @@ def setup_dados():
                     "verdefa",
                     "vermelhodo1",
                     "vermelhodo2",
-                    "amarelosi",
-                    "roxomi"
+                    "amarelomi",
+                    "roxosi"
                     )
-    tipos = ("/{}tom", "/{}amp", "/{}cor", "/{}ins")
-    for tipo in tipos:
-        for instrumento in instrumentos:
-            chave = tipo.format(instrumento)
-            dados[chave] = 100    
+    for instrumento in instrumentos:
+            dados[instrumento] = (0, 100, 100, 100)

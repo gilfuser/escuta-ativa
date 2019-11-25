@@ -32,6 +32,7 @@ void loop() {
                coresB[1][0], coresB[1][1], coresB[1][2],
                coresB[2][0], coresB[2][1], coresB[2][2],
                int(millis() / 100) % 360);
+
 }
 
 void triangulo(int ra, int ga, int ba,
