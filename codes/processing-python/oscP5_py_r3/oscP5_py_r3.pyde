@@ -15,7 +15,8 @@ def draw():
         amp = read_dados(instrumento, 1)
         cor = read_dados(instrumento, 2)
         ins = read_dados(instrumento, 3)
-        fill(cor, 100)
+        colorMode(HSB)
+        fill(cor % 255, 255, 255, 100)
         if ins:
             circle(tom, 0, amp) 
         else:
