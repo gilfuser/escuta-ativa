@@ -13,7 +13,9 @@ def draw():
     for instrumento in instrumentos:
         tom = read_dados(instrumento, 0)
         amp = read_dados(instrumento, 1)
-        ins = read_dados(instrumento, 2)
+        cor = read_dados(instrumento, 2)
+        ins = read_dados(instrumento, 3)
+        fill(cor, 100)
         if ins:
             circle(tom, 0, amp) 
         else:
@@ -29,18 +31,21 @@ def oscEvent(theOscMessage):
         if theOscMessage.addrPattern() == a:
             dados[a] = theOscMessage.get(0).intValue()
             print(a, dados[a])
+        c = "/{}cor".format(instrumento)
+        if theOscMessage.addrPattern() == i:
+            dados[c] = theOscMessage.get(0).intValue()
+            print(i, dados[c])
         i = "/{}ins".format(instrumento)
         if theOscMessage.addrPattern() == i:
             dados[i] = theOscMessage.get(0).intValue()
             print(i, dados[i])
 
 def read_dados(instrumento, num_tipo):
-    tipos = ("/{}tom", "/{}amp", "/{}ins")
     chave = tipos[num_tipo].format(instrumento)
     return dados[chave]
 
 def setup_dados():
-    global dados, instrumentos, oscP5
+    global dados, instrumentos, tipos, oscP5
     oscP5 = OscP5(this, 12000)
     dados = dict()
     instrumentos = ("verdesol",
@@ -51,7 +56,7 @@ def setup_dados():
                     "amarelosi",
                     "roxomi"
                     )
-    tipos = ("/{}tom", "/{}amp", "/{}ins")
+    tipos = ("/{}tom", "/{}amp", "/{}cor", "/{}ins")
     for tipo in tipos:
         for instrumento in instrumentos:
             chave = tipo.format(instrumento)
