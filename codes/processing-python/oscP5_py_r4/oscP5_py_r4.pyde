@@ -11,10 +11,7 @@ def draw():
     background(0)
     translate(0, height / 2)
     for instrumento in instrumentos:
-        tom = read_dados(instrumento, 0)
-        amp = read_dados(instrumento, 1)
-        cor = read_dados(instrumento, 2)
-        ins = read_dados(instrumento, 3)
+        tom, amp, cor, ins = read_dados(instrumento)
         colorMode(HSB)
         fill(cor % 255, 255, 255, 100)
         if ins:
@@ -30,9 +27,11 @@ def oscEvent(theOscMessage):
                 dados[chave] = theOscMessage.get(0).intValue()
                 print(chave, dados[chave])
      
-def read_dados(instrumento, num_tipo):
-    chave = tipos[num_tipo].format(instrumento)
-    return dados[chave]
+def read_dados(instrumento):
+    result = []
+    for i in range(4):
+        result.append(dados[tipos[i].format(instrumento)])
+    return result
 
 def setup_dados():
     global dados, instrumentos, tipos, oscP5
