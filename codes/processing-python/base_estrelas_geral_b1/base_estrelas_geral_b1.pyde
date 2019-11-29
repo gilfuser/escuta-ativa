@@ -3,14 +3,16 @@ add_library('oscP5') # precisa instalar no IDE do Processing oscP5!
 
 estrelas = []  # lista de objetos
 
-FULL_SCREEN = True
-# FULL_SCREEN = False
+
 
 def settings():
     size(600, 800)
 
 def setup():
+    global FULL_SCREEN; FULL_SCREEN = False
+    # uncomment next two lines
     fullScreen()
+    FULL_SCREEN = True
 
     """ Define área de desenho e popula lista de estrelas """
     # if FULL_SCREEN:
