@@ -1,2 +1,5 @@
 
 codes/.DS_Store
+codes/processing-python/.DS_Store
+*.properties
+*.class
