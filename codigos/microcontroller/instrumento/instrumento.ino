@@ -30,11 +30,11 @@
 #include <DNSServer.h>
 //#include <WiFiClient.h>
 #include <WiFiUdp.h>
-#include <OSCMessage.h>
-#include "I2Cdev.h"
+#include <OSCMessage.h> // instalar via IDE
+#include "I2Cdev.h"   // baixar no repo escuta-ativa
 #include "MPU6050_6Axis_MotionApps20.h"
 #include "Wire.h"
-#include <Adafruit_NeoPixel.h>
+#include <Adafruit_NeoPixel.h> // instalar via IDE
 
 #define PIN 4
 #define N_LEDS 12
@@ -222,11 +222,11 @@ void neopx_loop()
 {
   int r = int( (ypr[2] * 180 / M_PI) + 180);
 
-  triangulo(   coresB[0][0], coresB[0][1], coresB[0][2],
-               coresB[1][0], coresB[1][1], coresB[1][2],
-               coresB[2][0], coresB[2][1], coresB[2][2],
+  triangulo(   coresB[0][0], coresB[1][0], coresB[2][0],
+               coresB[0][1], coresB[1][1], coresB[2][1],
+               coresB[0][2], coresB[1][2], coresB[2][2],
                r);
-  
+  serial.println(r);
   //pixelHue = map (r, -180, 180, 0, 65535);
   int cor = strip.Color(r, g, b);
 
@@ -250,7 +250,7 @@ void triangulo(int ra, int ga, int ba,
     float t = map(v, 60, 120, 0, 1);
     lerpC(ra, ga, ba, rb, gb, bb, t);
   }
-  if (120 <= v && v < 180) {
+  if (120 <= v && v < 180) { 
     r = rb;
     g = gb;
     b = bb;
@@ -273,7 +273,7 @@ void triangulo(int ra, int ga, int ba,
 void lerpC(int r0, int g0, int b0,
            int r1, int g1, int b1,
            float t) {
-  r =  int (map(t, 0, 1, r0, r1));
+  r =  int(map(t, 0, 1, r0, r1));
   g =  int(map(t, 0, 1, g0, g1));
   b =  int(map(t, 0, 1, b0, b1));
 }
