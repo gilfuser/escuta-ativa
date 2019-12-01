@@ -10,7 +10,6 @@ coresA = ((255, 82, 0), (255, 247, 0), (0, 238, 255),
 coresC = ((224, 0, 255), (255, 245, 0), (0, 255, 241),
           (255, 0, 95), (255, 250, 0), (255, 255, 255))
 
-
 def paleta(ins, valor):
     opcoes = (coresB[:3],
               coresB[3:],
@@ -24,18 +23,24 @@ def paleta(ins, valor):
 
 def setup():
     size(500, 600)
+    noLoop()
     
 def draw():
     # background(paleta(0, int(map(mouseX, 0, width, 1, 359))))
     for i in range(6):
         y = i * 100
         passo = width / 360.
+        literal_paleta, template_cor = "", "({}, {}, {}),"
         for j in range(360):
             x = j * passo
             cor = paleta(i, j)
             noStroke()
             fill(cor)
+            literal_paleta += template_cor.format(int(red(cor)),
+                                                  int(green(cor)), 
+                                                  int(blue(cor)))
             rect(x, y, passo, 100)
+        print("({})".format(literal_paleta))
     
 def triangulo(a, b, c, v):
     if 0 <= v < 60 or v == 360:
