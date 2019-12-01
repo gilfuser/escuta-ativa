@@ -1,3 +1,7 @@
+"""
+Prova de conceito
+"""
+
 from estrela import Estrela
 add_library('oscP5')  # precisa instalar no IDE do Processing oscP5!
 
