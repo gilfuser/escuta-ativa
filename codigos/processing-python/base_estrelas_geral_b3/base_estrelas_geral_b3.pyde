@@ -67,9 +67,9 @@ def oscEvent(theOscMessage):
                 2).intValue() if theOscMessage.get(2) else 0
             cor = theOscMessage.get(
                 3).intValue() if theOscMessage.get(3) else 0
-            dados[instrumento] = (ins, tom, amp, cor)
-            # if cor == 0 or amp == 0 or tom == 0:
-            #     print(instrumento, dados[instrumento])
+            novos_dados[instrumento] = (ins, tom, amp, cor)
+            _, old_tom, old_amp, old_cor = dados[instrumento]
+            dados[instrumento] = (ins, old_tom, amp, old_cor)
 
 def setup_dados():
     global dados, instrumentos, oscP5, novos_dados
@@ -82,7 +82,7 @@ def setup_dados():
         # "vermelhodo1",
         # "vermelhodo2",
         # "amarelomi",
-        # "lilassi",
+        "lilassi",
     )
     dados = dict()
     novos_dados = dict()
@@ -96,6 +96,9 @@ def setup_dados():
 def keyPressed():
     if key == ' ':
         sorteio_dados()
+    if keyCode == SHIFT:
+        for instrumento in instrumentos:
+            print(instrumento, novos_dados[instrumento])
 
 def sorteio_dados():
     for instrumento in instrumentos:
