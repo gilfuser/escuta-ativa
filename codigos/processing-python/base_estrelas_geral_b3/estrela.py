@@ -24,11 +24,11 @@ class Estrela():
 
         if ins in (0, 1):    
             noFill()
-            estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp * 2)
+            estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp / 2)
         if ins in (2, 3):    
-            estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp * 2)
+            estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp / 2)
         if ins in (4, 5):    
-           estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp * 2)    
+           estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp / 2)    
         # self.tamanho -=  (self.tamanho + raio2 / 5)
         # estrela(self.x, self.y, pontas, raio1, raio2)
     
