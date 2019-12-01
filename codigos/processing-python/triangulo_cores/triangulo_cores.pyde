@@ -24,24 +24,27 @@ def paleta(ins, valor):
 def setup():
     size(500, 600)
     noLoop()
-    
+
 def draw():
-    # background(paleta(0, int(map(mouseX, 0, width, 1, 359))))
     for i in range(6):
         y = i * 100
         passo = width / 360.
-        literal_paleta, template_cor = "", "({}, {}, {}),"
+        # formata para o console literais de arrays de int para usar no Arduino
+        literal_paleta, template_cor = "", "{{{0}, {1}, {2}}},"
         for j in range(360):
             x = j * passo
             cor = paleta(i, j)
             noStroke()
             fill(cor)
-            literal_paleta += template_cor.format(int(red(cor)),
-                                                  int(green(cor)), 
-                                                  int(blue(cor)))
+            literal_cor = template_cor.format(int(red(cor)),
+                                              int(green(cor)),
+                                              int(blue(cor)))
+            if j == 359:
+                literal_cor = literal_cor[:-1] # tira vírgula após última cor
+            literal_paleta += literal_cor
             rect(x, y, passo, 100)
-        print("({})".format(literal_paleta))
-    
+        print("paleta{0} = {{{1}}}".format(i, literal_paleta))
+
 def triangulo(a, b, c, v):
     if 0 <= v < 60 or v == 360:
         return a
