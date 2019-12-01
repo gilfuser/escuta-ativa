@@ -1,4 +1,8 @@
-add_library('sound') # aviso de que vai usar o microfone
+# precisa baixar e instalar a biblioteca 'sound' no IDE do Processing
+# menu Sketch > Import Labrary... > Add Library... 
+# buscar por Sound da Fundação Processing no painel
+
+add_library('sound') # aviso de que vai usar a biblioteca sound
 
 x = 0
 
@@ -7,7 +11,7 @@ def setup():
     size(640, 360)
     fill(255, 0, 150)
     # Burocracia para receber o som e analisar o volume
-    source = AudioIn(this, 0)
+    source = AudioIn(this, 0) # a fonte é o microfone do micro
     source.start()
     loudness = Amplitude(this)
     loudness.input(source)
