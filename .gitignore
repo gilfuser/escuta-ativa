@@ -3,4 +3,5 @@ codes/.DS_Store
 codes/processing-python/.DS_Store
 *.properties
 *.class
+*.DS_Store
 .DS_Store
