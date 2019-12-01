@@ -52,7 +52,7 @@ def draw():
         nins, ntom, namp, ncor = novos_dados[instrumento]
         dados[instrumento] = (nins,
                               (tom + ntom) / 2,
-                              namp # sem easing | com easing: (amp + namp) / 2,
+                              namp, # sem easing | com easing: (amp + namp) / 2,
                               (cor + ncor) / 2)
 
 
