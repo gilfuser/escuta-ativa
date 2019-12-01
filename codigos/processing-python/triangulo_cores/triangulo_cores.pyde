@@ -23,10 +23,19 @@ def paleta(ins, valor):
     return triangulo(color(*a), color(*b), color(*c), int(valor))
 
 def setup():
-    size(500, 500)
+    size(500, 600)
     
 def draw():
-    background(paleta(0, int(map(mouseX, 0, width, 1, 359))))
+    # background(paleta(0, int(map(mouseX, 0, width, 1, 359))))
+    for i in range(6):
+        y = i * 100
+        passo = width / 360.
+        for j in range(360):
+            x = j * passo
+            cor = paleta(i, j)
+            noStroke()
+            fill(cor)
+            rect(x, y, passo, 100)
     
 def triangulo(a, b, c, v):
     if 0 <= v < 60 or v == 360:
@@ -38,11 +47,9 @@ def triangulo(a, b, c, v):
         return b
     if 180 <= v < 240:
         t = map(v, 180, 240, 0, 1)
-        print v, t
         return lerpColor(b, c, t)
     if 240 <= v < 300:
         return c
     if 300 <= v < 360:
         t = map(v, 300, 360, 0, 1)
-        print t
         return lerpColor(c, a, t)
