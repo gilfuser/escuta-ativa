@@ -11,8 +11,8 @@ def settings():
 def setup():
     global FULL_SCREEN; FULL_SCREEN = False
     # uncomment next two lines
-    fullScreen()
-    FULL_SCREEN = True
+    # fullScreen()
+    # FULL_SCREEN = True
 
     """ Define área de desenho e popula lista de estrelas """
     # if FULL_SCREEN:
@@ -39,7 +39,7 @@ def draw():
     background(0)  # atualização do desenho, fundo preto
     
     for i, estrela in enumerate(estrelas):
-        tom, amp, cor, ins = dados[instrumentos[i]]
+        ins, tom, amp, cor = dados[instrumentos[i]]
         estrela.desenha(cor, pontas=7, raio1=amp, raio2=tom)
         estrela.anda()
 
@@ -60,13 +60,13 @@ def setup_dados():
     oscP5 = OscP5(this, 12000)
     dados = dict()
     instrumentos = (
-                    # "verdesol",
+                    "verdesol",
                     # "laranjare",
                     # "verdefa",
                     # "vermelhodo1",
                     # "vermelhodo2",
                     # "amarelomi",
-                    "roxosi",
+                    # "roxosi",
                     )
     for instrumento in instrumentos:
             dados[instrumento] = (0, 100, 100, 100) 
