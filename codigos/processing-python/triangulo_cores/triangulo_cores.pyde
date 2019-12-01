@@ -43,7 +43,7 @@ def draw():
                 literal_cor = literal_cor[:-1] # tira vírgula após última cor
             literal_paleta += literal_cor
             rect(x, y, passo, 100)
-        print("paleta{0} = {{{1}}}".format(i, literal_paleta))
+        print("int paleta{0} [360][3] = {{{1}}}".format(i, literal_paleta))
 
 def triangulo(a, b, c, v):
     if 0 <= v < 60 or v == 360:
