@@ -48,11 +48,11 @@ def draw():
 
     for instrumento in instrumentos:
         # print(instrumento, dados[instrumento][-1], novos_dados[instrumento][-1])
-        ins, tom, amp, cor = dados[instrumento]
-        ___, ntom, namp, ncor = novos_dados[instrumento]
-        dados[instrumento] = (ins,
+        ___, tom, amp, cor = dados[instrumento]
+        nins, ntom, namp, ncor = novos_dados[instrumento]
+        dados[instrumento] = (nins,
                               (tom + ntom) / 2,
-                              (amp + namp) / 2,
+                              namp # sem easing | com easing: (amp + namp) / 2,
                               (cor + ncor) / 2)
 
 
@@ -68,8 +68,6 @@ def oscEvent(theOscMessage):
             cor = theOscMessage.get(
                 3).intValue() if theOscMessage.get(3) else 0
             novos_dados[instrumento] = (ins, tom, amp, cor)
-            _, old_tom, old_amp, old_cor = dados[instrumento]
-            dados[instrumento] = (ins, old_tom, amp, old_cor)
 
 def setup_dados():
     global dados, instrumentos, oscP5, novos_dados
