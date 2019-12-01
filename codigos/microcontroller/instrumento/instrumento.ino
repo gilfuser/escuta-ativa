@@ -226,7 +226,7 @@ void neopx_loop()
                coresB[0][1], coresB[1][1], coresB[2][1],
                coresB[0][2], coresB[1][2], coresB[2][2],
                r);
-  serial.println(r);
+  //serial.println(r);
   //pixelHue = map (r, -180, 180, 0, 65535);
   int cor = strip.Color(r, g, b);
 
@@ -316,7 +316,7 @@ void mpu_loop()
     mpu.dmpGetGravity(&gravity, &q);
     mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
     
-    OSCMessage msg("/vermelhodo1");
+    OSCMessage msg("/verdefa1");
     msg.add(ypr[0] * 180 / M_PI);
     msg.add(ypr[1] * 180 / M_PI);
     msg.add(ypr[2] * 180 / M_PI);
