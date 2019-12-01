@@ -1,3 +1,7 @@
+"""
+Prova de conceito
+"""
+
 from estrela import Estrela
 add_library('oscP5')  # precisa instalar no IDE do Processing oscP5!
 
@@ -73,11 +77,12 @@ def setup_dados():
     instrumentos = (
         "verdesol",
         "laranjare",
-        "verdefa",
+        "verdefa1",
+        "verdefa2",
         "vermelhodo1",
         # "vermelhodo2",
         "amarelomi",
-        "roxosi",
+        "lilassi",
     )
     dados = dict()
     novos_dados = dict()

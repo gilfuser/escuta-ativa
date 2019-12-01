@@ -20,12 +20,12 @@ class Estrela():
         """ Desenha polígono em torno das coordenadas do objeto """
         colorMode(RGB)
         noStroke()
-        stroke(paleta(1, cor))
+        stroke(paleta(Estrela.paleta_atual, cor))
         fill(0)
         strokeWeight(5)
         strokeJoin(ROUND)
         self.tamanho -=  (self.tamanho + raio2 / 5)
-    
+        estrela(self.x, self.y, pontas, raio1, raio2)
     
     def anda(self, tom=None):
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
