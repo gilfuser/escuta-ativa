@@ -23,6 +23,7 @@ class Estrela():
         strokeJoin(ROUND)
 
         if ins in (0, 1):    
+            noFill()
             estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp * 2)
         if ins in (2, 3):    
             estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp * 2)
