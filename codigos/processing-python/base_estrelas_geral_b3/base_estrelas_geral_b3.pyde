@@ -27,10 +27,14 @@ def setup():
 def draw():
     """ Limpa a tela, desenha e atualiza estrelas """
     background(0)  # atualização do desenho, fundo preto
+    # OU
+    # fill(0, 10)
+    # noStroke()
+    # rect(0, 0, width, height)
 
     for i, estrela in enumerate(estrelas):
         ins, tom, amp, cor = dados[instrumentos[i]]
-        estrela.desenha(ins, cor, amp, mousePressed)
+        estrela.desenha(ins, cor, amp, FULL_SCREEN)
         estrela.anda(tom)
 
     for instrumento in instrumentos:
@@ -38,8 +42,7 @@ def draw():
         nins, ntom, namp, ncor = novos_dados[instrumento]
         dados[instrumento] = (nins,
                               (tom + ntom) / 2,
-                              # sem easing | com easing: (amp + namp) / 2,
-                              namp,
+                              namp, # namp + random(-10, 10), # com easing: (amp + namp) / 2,
                               (cor + ncor) / 2)
 
 def oscEvent(oscMessage):
