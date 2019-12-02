@@ -7,6 +7,7 @@ add_library('oscP5')  # precisa instalar no IDE do Processing oscP5!
 
 estrelas = []  # lista de objetos
 FULL_SCREEN = False
+movimento = 0 
 
 def settings():
     size(600, 800)
@@ -16,32 +17,29 @@ def setup():
     # fullScreen()
     # global FULL_SCREEN = True
     setup_dados()
-
-    meia_largura, meia_altura = width / 2., height / 2.  # floats
     print instrumentos
     for _ in range(len(instrumentos)):
         e = Estrela(random(width), random(height))
         estrelas.append(e)
-    print len(estrelas), len(instrumentos)
 
 def draw():
     """ Limpa a tela, desenha e atualiza estrelas """
-    background(0)  # atualização do desenho, fundo preto
+    # background(0)  # atualização do desenho, fundo preto
     # OU
-    # fill(0, 10)
-    # noStroke()
-    # rect(0, 0, width, height)
+    fill(0, 10)
+    noStroke()
+    rect(0, 0, width, height)
 
     for i, estrela in enumerate(estrelas):
         ins, tom, amp, cor = dados[instrumentos[i]]
-        estrela.desenha(ins, cor, amp, FULL_SCREEN)
+        estrela.desenha(movimento, cor, amp, FULL_SCREEN) # trocar movimneto por ins!!!
         estrela.anda(tom)
 
     for instrumento in instrumentos:
         ___, tom, amp, cor = dados[instrumento]
         nins, ntom, namp, ncor = novos_dados[instrumento]
         dados[instrumento] = (nins,
-                              (tom + ntom) / 2,
+                              lerp(tom, ntom, .2),
                               namp, # namp + random(-10, 10), # com easing: (amp + namp) / 2,
                               (cor + ncor) / 2)
 
@@ -67,27 +65,30 @@ def setup_dados():
         "amarelomi",
         "lilassi",
     )
-    dados = dict()
-    novos_dados = dict()
     # sorteio inicial de teste e inicialização
-    sorteio_dados()
-    for instrumento in instrumentos:
-        dados[instrumento] = (0,
-                              int(random(-24, 24)),
-                              int(random(10, 250)),
-                              int(random(360)))
+    novos_dados = sorteio_dados()
+    dados = sorteio_dados()
+
 
 def keyPressed():
     if key == ' ':
-        sorteio_dados()
+        global novos_dados
+        novos_dados = sorteio_dados()
     if keyCode == SHIFT:
         for instrumento in instrumentos:
             print(instrumento, novos_dados[instrumento])
+            
+    if str(key) in "012345":
+        global movimento
+        movimento = int(key) 
+        print(movimento)
 
 def sorteio_dados():
+    dados = dict()
     for instrumento in instrumentos:
-        novos_dados[instrumento] = (
+        dados[instrumento] = (
             0,
             int(random(-24, 24)),
-            int(random(10, 250)),
+            int(random(10, 150)),
             int(random(360)))
+    return dados

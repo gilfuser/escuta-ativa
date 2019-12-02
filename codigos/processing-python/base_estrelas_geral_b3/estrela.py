@@ -16,10 +16,11 @@ class Estrela():
 
     def desenha(self, ins, cor, amp, FULL_SCREEN=False):
         """ Desenha polígono em torno das coordenadas do objeto """
+        raio1, raio2 = amp, amp / 4
         strokeWeight(5)
         colorMode(RGB)
-        noStroke()
         stroke(paleta(ins, cor))
+        fill(paleta(ins, cor))
         strokeJoin(ROUND)
         if FULL_SCREEN:
             translate(width/2, height/2)
@@ -28,11 +29,23 @@ class Estrela():
         self.tamanho = amp 
         if ins in (0, 1):    
             noFill()
-            estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp / 2)
+            fill(0)
+            estrela(self.x, self.y, 7, raio1, raio2)
         if ins in (2, 3):    
-            estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp / 2)
-        if ins in (4, 5):    
-           estrela(self.x, self.y, pontas=7, raio1=amp, raio2=amp / 2)   
+            noStroke()
+            pushMatrix()
+            translate(self.x, self.y)
+            estrela(0, 0, 4, raio1, raio1/4)
+            rotate(QUARTER_PI)
+            estrela(0, 0, 4, raio1 * .7, raio1/4 * .7)
+            popMatrix()
+        if ins in (4, 5):  
+            stroke(0)  
+            pushMatrix()
+            translate(self.x, self.y)
+            rotate(radians(frameCount))
+            estrela(0, 0, 10, raio1, 50)
+            popMatrix() 
         if FULL_SCREEN:
             translate(width/2, height/2)
             rotate(-HALF_PI)
