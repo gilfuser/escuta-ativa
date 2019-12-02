@@ -20,6 +20,8 @@ def paleta(ins, valor):
               coresC[:3],
               coresC[3:],
               )
+    if ins == 6:
+        ins = int(random(6))
     a, b, c = opcoes[ins]
     return triangulo(color(*a), color(*b), color(*c), int(valor))
 

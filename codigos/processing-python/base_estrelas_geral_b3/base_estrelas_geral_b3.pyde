@@ -14,11 +14,29 @@ def settings():
 
 def setup():
     """ Define área de desenho e popula lista de estrelas """
+    global dados, instrumentos, oscP5, novos_dados
     # fullScreen()
     # global FULL_SCREEN = True
-    setup_dados()
+    background(0)
+    # inicializa OSC    
+    oscP5 = OscP5(this, 12000)
+    # definie quais instrumentos vão ser ouvidos
+    instrumentos = (
+        "verdesol",
+        "laranjare",
+        "verdefa1",
+        # "verdefa2",
+        "vermelhodo1",
+        # "vermelhodo2",
+        "amarelomi",
+        "lilassi",
+    )
+    # sorteio inicial de teste e inicialização
+    novos_dados = sorteio_dados()
+    dados = sorteio_dados()
     print instrumentos
-    for _ in range(len(instrumentos)):
+    # cria uma estrela pra cada instrumento
+    for _ in instrumentos:
         e = Estrela(random(width), random(height))
         estrelas.append(e)
 
@@ -52,24 +70,6 @@ def oscEvent(oscMessage):
             cor = oscMessage.get(3).intValue() if oscMessage.get(3) else 0
             novos_dados[instrumento] = (ins, tom, amp, cor)
 
-def setup_dados():
-    global dados, instrumentos, oscP5, novos_dados
-    oscP5 = OscP5(this, 12000)
-    instrumentos = (
-        "verdesol",
-        "laranjare",
-        "verdefa1",
-        # "verdefa2",
-        "vermelhodo1",
-        # "vermelhodo2",
-        "amarelomi",
-        "lilassi",
-    )
-    # sorteio inicial de teste e inicialização
-    novos_dados = sorteio_dados()
-    dados = sorteio_dados()
-
-
 def keyPressed():
     if key == ' ':
         global novos_dados
@@ -78,6 +78,7 @@ def keyPressed():
         for instrumento in instrumentos:
             print(instrumento, novos_dados[instrumento])
             
+    # if str(key) in "0123456":
     if str(key) in "012345":
         global movimento
         movimento = int(key) 

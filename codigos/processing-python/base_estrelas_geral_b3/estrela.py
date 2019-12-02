@@ -4,15 +4,10 @@ from cores import *
 class Estrela():
     """ Classe Estrela, cor sorteada, tamanho sorteado por default """    
     
-    def __init__(self, px, py, ptamanho=None):
-        self.x = px
-        self.y = py
-        if ptamanho:
-            self.tamanho = ptamanho
-        else:
-            self.tamanho = random(50, 200)
-        self.vx = random(-2,2)
-        self.vy = random(-2,-4)
+    def __init__(self, x, y, tam=100):
+        self.x, self.y = x, y
+        self.tamanho = tam
+        self.vy = -3
 
     def desenha(self, ins, cor, amp, FULL_SCREEN=False):
         """ Desenha polígono em torno das coordenadas do objeto """
@@ -27,6 +22,8 @@ class Estrela():
             rotate(HALF_PI)
             translate(-width/2, -height/2)
         self.tamanho = amp 
+        if ins == 6:
+            ins = int(random(6))
         if ins in (0, 1):    
             noFill()
             fill(0)
@@ -55,7 +52,8 @@ class Estrela():
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
         if tom is not None:
             self.x = map(tom, -24, 24, 1, w) 
-        self.x += self.vx
+        # self.x += self.vx
+        self.vy = -3 * 40 / (tom + 40)
         self.y += self.vy
         metade = self.tamanho
         if self.x > w + metade:
