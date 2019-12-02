@@ -12,9 +12,9 @@ class Estrela():
     def desenha(self, ins, cor, amp, FULL_SCREEN=False):
         """ Desenha polígono em torno das coordenadas do objeto """
         raio1, raio2 = amp, amp / 4
-        strokeWeight(5)
+        self.tamanho = amp
         colorMode(RGB)
-        stroke(paleta(ins, cor))
+        stroke(paleta(ins, cor), 150)
         fill(paleta(ins, cor))
         strokeJoin(ROUND)
         if FULL_SCREEN:
@@ -22,11 +22,10 @@ class Estrela():
             rotate(HALF_PI)
             translate(-width/2, -height/2)
         self.tamanho = amp 
-        if ins == 6:
-            ins = int(random(6))
-        if ins in (0, 1):    
+        if ins in (0, 1):  
+            strokeWeight(5)  
             noFill()
-            fill(0)
+            fill(0, 10)
             estrela(self.x, self.y, 7, raio1, raio2)
         if ins in (2, 3):    
             noStroke()
@@ -36,7 +35,8 @@ class Estrela():
             rotate(QUARTER_PI)
             estrela(0, 0, 4, raio1 * .7, raio1/4 * .7)
             popMatrix()
-        if ins in (4, 5):  
+        if ins in (4, 5):
+            strokeWeight(2)  
             stroke(0)  
             pushMatrix()
             translate(self.x, self.y)
@@ -51,19 +51,19 @@ class Estrela():
     def anda(self, tom=None, w=600, h=800):
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
         if tom is not None:
-            self.x = map(tom, -24, 24, 1, w) 
+            self.x = map(tom, -24, 24, self.tamanho, w - self.tamanho) 
         # self.x += self.vx
         self.vy = -3 * 40 / (tom + 40)
         self.y += self.vy
-        metade = self.tamanho
-        if self.x > w + metade:
-            self.x = -metade
-        if self.y > h + metade:
-            self.y = -metade
-        if self.x < -metade:
-            self.x = w + metade
-        if self.y < -metade:
-            self.y = h + metade
+        tam = self.tamanho
+        if self.x > w + tam:
+            self.x = -tam
+        if self.y > h + tam:
+            self.y = -tam
+        if self.x < -tam:
+            self.x = w + tam
+        if self.y < -tam:
+            self.y = h + tam
 
 def estrela(cx, cy, pontas, raio1, raio2):    
     pontos = pontas * 2
