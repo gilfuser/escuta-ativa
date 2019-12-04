@@ -33,8 +33,8 @@ def setup():
     print instrumentos
     # cria uma estrela pra cada instrumento
     estrelas = []  # lista de objetos
-    for _ in instrumentos:
-        e = Estrela(random(width), random(height))
+    for i, _ in enumerate(instrumentos):
+        e = Estrela(0, i * height / len(instrumentos))
         estrelas.append(e)
 
 def draw():
