@@ -16,8 +16,9 @@ class Estrela():
         raio1, raio2 = amp, amp / 4
         self.tamanho = amp
         colorMode(RGB)
-        stroke(paleta(ins, cor), 150)
-        fill(paleta(ins, cor))
+        cor_final = paleta(ins, cor)
+        stroke(cor_final, 150)
+        fill(cor_final)
         strokeJoin(ROUND)
         if Estrela.FULL_SCREEN:
             translate(width / 2, height / 2)
@@ -35,7 +36,8 @@ class Estrela():
             translate(self.x, self.y)
             estrela(0, 0, 4, raio1, raio1 / 4)
             rotate(QUARTER_PI)
-            estrela(0, 0, 4, raio1 * .7, raio1 / 4 * .7)
+            fill(cor_final, 100)
+            estrela(0, 0, 4, raio1 * .8, raio1 / 4 * .8)
             popMatrix()
         if ins in (4, 5):
             strokeWeight(2)
