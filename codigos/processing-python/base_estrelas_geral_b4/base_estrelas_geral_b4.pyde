@@ -22,12 +22,14 @@ Estrela.FULL_SCREEN = False
 def setup():
     """ Define área de desenho e popula lista de estrelas """
     global dados, instrumentos, oscP5, novos_dados, estrelas
+    
     size(600, 800)
     # fullScreen(0) # USAR COM Estrela.FULL_SCREEN = True
     background(0)
+    
     # inicializa OSC
     oscP5 = OscP5(this, 12000)
-    # sorteio inicial de teste e inicialização
+    # inicialização das estruturas de dados
     novos_dados = setup_dados()
     dados = setup_dados()
     print instrumentos
