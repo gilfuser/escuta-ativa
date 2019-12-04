@@ -61,7 +61,7 @@ def draw():
         dados[instrumento] = (nins,                  # ins/modo/ins_override
                               lerp(tom, ntom, .2),  # easing "suave"
                               namp,                # sem easing
-                              (cor + ncor) / 2   # easing "rápido"
+                              cor, #(cor + ncor) / 2   # easing "rápido"
                               )
 
 def oscEvent(oscMessage):

@@ -31,12 +31,13 @@ class Estrela():
             fill(0, 10)
             estrela(self.x, self.y, 7, raio1, raio2)
         if ins in (2, 3):
-            noStroke()
             pushMatrix()
             translate(self.x, self.y)
+            stroke(0)
             estrela(0, 0, 4, raio1, raio1 / 4)
             rotate(QUARTER_PI)
-            fill(cor_final, 100)
+            noStroke()
+            fill(cor_final, min(255, amp))
             estrela(0, 0, 4, raio1 * .8, raio1 / 4 * .8)
             popMatrix()
         if ins in (4, 5):
