@@ -1,3 +1,5 @@
+// TECLAS 0 1 2 3 4 5 ou ESPAÇO 
+
 import oscP5.*;
 import netP5.*;
 import java.io.FileReader;
@@ -7,6 +9,8 @@ NetAddress myRemoteLocation;
 
 BufferedReader reader0;
 BufferedReader reader1;
+
+int instrumento_override = -1;
 
 void setup() {
   reader0 = createReader("mi.csv") ;
@@ -30,7 +34,9 @@ void tryReader(BufferedReader reader) {
     if ((line = reader.readLine()) != null) {
       String[] pieces = split(line, ",");
       String device = pieces[0];
-      int ins = int(pieces[1]);
+      int ins;
+      if (instrumento_override < 0)  ins = int(pieces[1]);
+      else ins = instrumento_override;
       int tom = int(pieces[2]);
       int amp = int(pieces[3]);
       int cor = int(pieces[4]);
@@ -61,4 +67,14 @@ void sendOsc(String device, int ins, int tom, int amp, int cor) {
   myMessage.add(cor); //cor 0 to 360
   // Manda!
   oscP5.send(myMessage, myRemoteLocation);
+}
+
+void keyPressed() {
+  if (key == '0')  instrumento_override = 0;
+  if (key == '1')  instrumento_override = 1;
+  if (key == '2')  instrumento_override = 2;
+  if (key == '3')  instrumento_override = 3;
+  if (key == '4')  instrumento_override = 4;
+  if (key == '5')  instrumento_override = 5;
+  if (key == ' ')  instrumento_override = -1;
 }
