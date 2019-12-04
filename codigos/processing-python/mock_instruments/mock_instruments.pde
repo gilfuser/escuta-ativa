@@ -33,15 +33,17 @@ void tryReader(BufferedReader reader) {
   try {
     if ((line = reader.readLine()) != null) {
       String[] pieces = split(line, ",");
-      String device = pieces[0];
-      int ins;
-      if (instrumento_override < 0)  ins = int(pieces[1]);
-      else ins = instrumento_override;
-      int tom = int(pieces[2]);
-      int amp = int(pieces[3]);
-      int cor = int(pieces[4]);
-      sendOsc(device, ins, tom, amp, cor);
-      println(device, ins, tom, amp, cor);
+      if (pieces.length == 5) {
+        String device = pieces[0];
+        int ins;
+        if (instrumento_override < 0)  ins = int(pieces[1]);
+        else ins = instrumento_override;
+        int tom = int(pieces[2]);
+        int amp = int(pieces[3]);
+        int cor = int(pieces[4]);
+        sendOsc(device, ins, tom, amp, cor);
+        println(device, ins, tom, amp, cor);
+      } else println("zoado: ", pieces);
     }
   } 
   catch (IOException e) {
