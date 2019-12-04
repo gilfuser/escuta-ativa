@@ -95,13 +95,3 @@ def keyPressed():
     if keyCode == SHIFT:
         for instrumento in instrumentos:
             print(instrumento, novos_dados[instrumento])
-        
-# def keyReleased():
-#     if keyCode == ALT:
-#         for instrumento in instrumentos:
-#             nins, ntom, namp, ncor = dados[instrumento]
-#             novos_dados[instrumento] = (
-#             nins, 
-#             ntom,
-#             random(10, 50),
-#             ncor)
