@@ -4,30 +4,32 @@ Vamos ler umas paradas
 from estrela import Estrela
 add_library('oscP5')  # precisa instalar no IDE do Processing oscP5!
 
+ins_override = -1  # -1 é o "normal" sem override
 # definie instrumentos que vão ser ouvidos
 instrumentos = (
-                # "verdesol",
-                "laranjare",
-                # "verdefa1",
-                # "verdefa2",
-                # "vermelhodo1",
-                # "vermelhodo2",
-                "amarelomi",
-                # "lilassi",
-                )
-FULL_SCREEN = False
+    # "verdesol",
+    "laranjare",
+    # "verdefa1",
+    # "verdefa2",
+    # "vermelhodo1",
+    # "vermelhodo2",
+    "amarelomi",
+    # "lilassi",
+)
+Estrela.FULL_SCREEN = False
+# Estrela.FULL_SCREEN = True  # USAR JUNTO COM O fullScreen() no setup()
 
 def setup():
     """ Define área de desenho e popula lista de estrelas """
     global dados, instrumentos, oscP5, novos_dados, estrelas
     size(600, 800)
-    # fullScreen()
+    # fullScreen(0) # USAR COM Estrela.FULL_SCREEN = True
     background(0)
     # inicializa OSC
     oscP5 = OscP5(this, 12000)
     # sorteio inicial de teste e inicialização
-    novos_dados = sorteio_dados()
-    dados = sorteio_dados()
+    novos_dados = setup_dados()
+    dados = setup_dados()
     print instrumentos
     # cria uma estrela pra cada instrumento
     estrelas = []  # lista de objetos
@@ -45,18 +47,19 @@ def draw():
 
     for i, estrela in enumerate(estrelas):
         ins, tom, amp, cor = dados[instrumentos[i]]
-        estrela.desenha(ins, cor, amp, FULL_SCREEN)
+        estrela.desenha(ins, cor, amp)
         estrela.anda(tom)
 
     for instrumento in instrumentos:
         ___, tom, amp, cor = dados[instrumento]
         nins, ntom, namp, ncor = novos_dados[instrumento]
-        dados[instrumento] = (nins,
-                              lerp(tom, ntom, .2),
-                              # namp + random(-10, 10), # com easing: (amp +
-                              # namp) / 2,
-                              namp,
-                              (cor + ncor) / 2)
+        if ins_override >= 0:
+            nins = ins_override
+        dados[instrumento] = (nins,                  # ins/modo/ins_override
+                              lerp(tom, ntom, .2),  # easing "suave"
+                              namp,                # sem easing
+                              (cor + ncor) / 2   # easing "rápido"
+                              )
 
 def oscEvent(oscMessage):
     for instrumento in instrumentos:
@@ -67,31 +70,24 @@ def oscEvent(oscMessage):
             cor = oscMessage.get(3).intValue() if oscMessage.get(3) else 0
             novos_dados[instrumento] = (ins, tom, amp, cor)
 
-def sorteio_dados():
+def setup_dados():
     dados = dict()
     for instrumento in instrumentos:
         dados[instrumento] = (
-            0,
-            int(random(-24, 24)),
-            int(random(10, 150)),
-            int(random(360)))
+            0,  # ins/modo/ins_override
+            0,  # int(random(-24, 24)),
+            100,  # int(random(10, 150)),
+            0,  # int(random(360)),
+        )
     return dados
 
 def keyPressed():
+    global ins_override
     if str(key) in "0123456":
-        movimento = int(key)
-        print(movimento)
-        for instrumento in instrumentos:
-            nins, ntom, namp, ncor = dados[instrumento]
-            novos_dados[instrumento] = (
-            movimento, 
-            ntom,
-            namp,
-            ncor)        
-        
+        ins_override = int(key)
+        print(ins_override)
     if key == ' ':
-        global novos_dados
-        novos_dados = sorteio_dados()
+        ins_override = -1
     if keyCode == SHIFT:
         for instrumento in instrumentos:
             print(instrumento, novos_dados[instrumento])
