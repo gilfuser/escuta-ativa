@@ -16,17 +16,18 @@ instrumentos = (
     "amarelomi",
     # "lilassi",
 )
-Estrela.FULL_SCREEN = False
-# Estrela.FULL_SCREEN = True  # USAR JUNTO COM O fullScreen() no setup()
+Estrela.full_screen = False # True para tela inteira e giro 90 graus da animação
 
 def setup():
     """ Define área de desenho e popula lista de estrelas """
     global dados, instrumentos, oscP5, novos_dados, estrelas
     
-    size(600, 800)
-    # fullScreen(0) # USAR COM Estrela.FULL_SCREEN = True
+    fullScreen(1)  # testar se 1 vai para segundo monitor
+    this.surface.setResizable(True)
+    if not Estrela.full_screen:
+        this.surface.setSize(600, 800)
     background(0)
-    
+
     # inicializa OSC
     oscP5 = OscP5(this, 12000)
     # inicialização das estruturas de dados
@@ -41,8 +42,8 @@ def setup():
 
 def draw():
     """ Limpa a tela, desenha e atualiza estrelas """
-    # background(0)  # atualização do desenho, fundo preto
-    # OU
+    # background(0)  # fundo preto OU
+    # apagamento parcial para "rastro":
     fill(0, 10)
     noStroke()
     rect(0, 0, width, height)
@@ -93,3 +94,13 @@ def keyPressed():
     if keyCode == SHIFT:
         for instrumento in instrumentos:
             print(instrumento, novos_dados[instrumento])
+    if key == 'f':
+        Estrela.full_screen = not Estrela.full_screen
+        if Estrela.full_screen:
+            this.surface.setSize(displayWidth, displayHeight)
+            this.surface.setLocation(0, 0)
+        else:
+            this.surface.setSize(600, 800)
+                    
+def mouseDragged():
+    this.surface.setLocation(mouseX, mouseY)

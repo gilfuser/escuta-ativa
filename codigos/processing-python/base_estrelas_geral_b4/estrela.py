@@ -4,7 +4,7 @@ from cores import *
 class Estrela():
 
     """ Classe Estrela, cor sorteada, tamanho sorteado por default """
-    FULL_SCREEN = False
+    full_screen = False
 
     def __init__(self, x, y, tam=100):
         self.x, self.y = x, y
@@ -20,7 +20,7 @@ class Estrela():
         stroke(cor_final, 150)
         fill(cor_final)
         strokeJoin(ROUND)
-        if Estrela.FULL_SCREEN:
+        if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(HALF_PI)
             translate(-width / 2, -height / 2)
@@ -47,14 +47,14 @@ class Estrela():
             rotate(radians(frameCount))
             estrela(0, 0, 10, raio1, 50)
             popMatrix()
-        if Estrela.FULL_SCREEN:
+        if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(-HALF_PI)
             translate(-width / 2, -height / 2)
 
     def anda(self, tom=None):
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
-        # if Estrela.FULL_SCREEN:
+        # if Estrela.full_screen:
         #     w, h = height, width
         # else:
         w, h = width, height
