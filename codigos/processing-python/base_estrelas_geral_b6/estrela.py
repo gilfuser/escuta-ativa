@@ -30,24 +30,21 @@ class Estrela():
             strokeWeight(5)
             noFill()
             fill(0, 10)
-            if Estrela.ins_override == 6:
-                stroke(255,200)
+            apply_override()
             estrela(self.x, self.y, 7, raio1, raio2)
         if ins in (2, 3):
             pushMatrix()
             translate(self.x, self.y)
             stroke(0)
-            if Estrela.ins_override == 6:
-                cor_final = 255
             fill(cor_final, min(255, amp))
+            apply_override()
             estrela(0, 0, 4, raio1, raio1 / 4)
             rotate(QUARTER_PI)
             noStroke()
             s = 4 if ins == 5 else 5
             cor2 = paleta(s, cor)
-            if Estrela.ins_override == 6:
-                cor2 = 255
-            fill(cor2, min(255, amp))                
+            fill(cor2, min(255, amp))
+            apply_override()
             estrela(0, 0, 4, raio1 * .8, raio1 / 4 * .8)
             popMatrix()
         if ins in (4, 5):
@@ -56,19 +53,12 @@ class Estrela():
             pushMatrix()
             translate(self.x, self.y)
             rotate(radians(frameCount))
-            if Estrela.ins_override == 6:
-                cor_final = 255
             fill(cor_final, 230 - min(230, amp))
             s = 4 if ins == 5 else 5
             stroke(paleta(s, cor))
-            if Estrela.ins_override == 6:
-                stroke(0, 100)
+            apply_override()
             estrela(0, 0, 10, raio1, 50)
             popMatrix()
-        if ins == 6:
-            fill(255, 100)
-            noStroke()
-            estrela(self.x, self.y, 10, raio1, 50)
         if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(-HALF_PI)
@@ -78,11 +68,10 @@ class Estrela():
     #     if Estrela.ins_override == 6:
     #         fill(255,200)
     #         stroke(255,200)
-    # #     else:
-    # #         pass
+    # else:
+    # pass
     #     if s is None: noStroke()
     #     if f is None: noFill()
-
 
     def anda(self, tom=None):
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
@@ -104,6 +93,12 @@ class Estrela():
             self.x = w + tam
         if self.y < -tam:
             self.y = h + tam
+
+def apply_override():
+    if Estrela.ins_override == 6:
+        stroke(255)
+        noFill()
+        strokeWeight(1)
 
 def estrela(cx, cy, pontas, raio1, raio2):
     pontos = pontas * 2
