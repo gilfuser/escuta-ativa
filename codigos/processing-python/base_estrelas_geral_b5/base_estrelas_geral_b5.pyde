@@ -88,7 +88,7 @@ def setup_dados():
 
 def keyPressed():
     global ins_override
-    if str(key) in "0123456":
+    if str(key) in "01234567":
         ins_override = int(key)
         print(ins_override)
     if key == ' ':

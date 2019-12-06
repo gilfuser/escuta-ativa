@@ -34,10 +34,13 @@ class Estrela():
             pushMatrix()
             translate(self.x, self.y)
             stroke(0)
+            fill(cor_final, min(255, amp))
             estrela(0, 0, 4, raio1, raio1 / 4)
             rotate(QUARTER_PI)
             noStroke()
-            fill(cor_final, min(255, amp))
+            s = 4 if ins == 5 else 5
+            cor2 = paleta(s, cor)
+            fill(s, min(255, amp))
             estrela(0, 0, 4, raio1 * .8, raio1 / 4 * .8)
             popMatrix()
         if ins in (4, 5):
@@ -46,9 +49,15 @@ class Estrela():
             pushMatrix()
             translate(self.x, self.y)
             rotate(radians(frameCount))
-            fill(cor_final, 255 - min(230, amp))
+            fill(cor_final, 230 - min(230, amp))
+            s = 4 if ins == 5 else 5
+            stroke(paleta(s, cor))
             estrela(0, 0, 10, raio1, 50)
             popMatrix()
+        if ins == 6:
+            fill(255, 100)
+            noStroke()
+            estrela(self.x, self.y, 10, raio1, 50)
         if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(-HALF_PI)
