@@ -54,6 +54,7 @@ def draw():
         ins, tom, amp, cor = dados[instrumentos[i]]
         if ins_override == 6:
             ins = i
+            cor, tom, amp = mock_final(i)
         estrela.desenha(ins, cor, amp)
         estrela.anda(tom)
 
@@ -67,6 +68,12 @@ def draw():
                               namp,                # sem easing
                               cor, #(cor + ncor) / 2   # easing "rápido"
                               )
+def mock_final(i):
+    cor = 360 * noise(i * 100 + frameCount * .02)
+    tom = -34 + 36 * noise(i * 200 + frameCount * .001)
+    amp = 100 * noise(i * 300 + frameCount * .02)
+    return cor, tom, amp
+    
 
 def oscEvent(oscMessage):
     for instrumento in instrumentos:
