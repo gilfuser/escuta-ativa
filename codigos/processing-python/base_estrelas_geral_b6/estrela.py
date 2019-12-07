@@ -19,43 +19,36 @@ class Estrela():
         colorMode(RGB)
         cor_final = paleta(ins, cor)
         stroke(cor_final, 150)
-        fill(cor_final)
         strokeJoin(ROUND)
         if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(HALF_PI)
             translate(-width / 2, -height / 2)
-        self.tamanho = amp
         if ins in (0, 1):
-            strokeWeight(5)
-            noFill()
-            fill(0, 10)
+            fill(0, 10) # preto bem fraquinho
             apply_override()
-            estrela(self.x, self.y, 7, raio1, raio2)
+            estrela(self.x, self.y, 7, raio1 * .6, raio2 * .6)
         if ins in (2, 3):
             pushMatrix()
             translate(self.x, self.y)
-            stroke(0)
-            fill(cor_final, min(255, amp))
+            stroke(cor_final, min(255, amp))
             apply_override()
-            estrela(0, 0, 4, raio1, raio1 / 4)
+            estrela(0, 0, 4, raio1, raio2)
             rotate(QUARTER_PI)
-            noStroke()
             s = 4 if ins == 5 else 5
             cor2 = paleta(s, cor)
-            fill(cor2, min(255, amp))
+            stroke(cor2, min(255, amp))
             apply_override()
-            estrela(0, 0, 4, raio1 * .8, raio1 / 4 * .8)
+            estrela(0, 0, 4, raio1 * .8, raio2 * .8)
             popMatrix()
         if ins in (4, 5):
-            strokeWeight(2)
             stroke(0)
             pushMatrix()
             translate(self.x, self.y)
             rotate(radians(frameCount))
-            fill(cor_final, 230 - min(230, amp))
-            s = 4 if ins == 5 else 5
-            stroke(paleta(s, cor))
+            stroke(cor_final, 230 - min(230, amp))
+            # s = 4 if ins == 5 else 5
+            # stroke(paleta(s, cor))
             apply_override()
             estrela(0, 0, 10, raio1, 50)
             popMatrix()

@@ -39,7 +39,7 @@ def setup():
     # cria uma estrela pra cada instrumento
     estrelas = []  # lista de objetos
     for i, _ in enumerate(instrumentos):
-        e = Estrela(0, i * height / len(instrumentos))
+        e = Estrela(0, i * height / (len(instrumentos) - 2.2))
         estrelas.append(e)
 
 def draw():
@@ -58,7 +58,7 @@ def draw():
         estrela.desenha(ins, cor, amp)
         estrela.anda(tom)
 
-    for instrumento in instrumentos:
+    for i, instrumento in enumerate(instrumentos):
         ___, tom, amp, cor = dados[instrumento]
         nins, ntom, namp, ncor = novos_dados[instrumento]
         if ins_override >= 0:
@@ -66,7 +66,8 @@ def draw():
         dados[instrumento] = (nins,                  # ins/modo/ins_override
                               lerp(tom, ntom, .2),  # easing "suave"
                               namp,                # sem easing
-                              cor, #(cor + ncor) / 2   # easing "rápido"
+                              # cor, #(cor + ncor) / 2   # easing "rápido"
+                              360 * noise(i + frameCount * .02)
                               )
 def mock_final(i):
     cor = 360 * noise(i * 100 + frameCount * .02)
