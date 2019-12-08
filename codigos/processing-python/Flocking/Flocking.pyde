@@ -15,7 +15,7 @@ from flock import Flock
 flock = Flock()
 
 def setup():
-    size(800, 600)
+    size(1024, 760)
     background(0)
     # Add an initial set of boids into the system
     for i in range(18):
@@ -23,7 +23,7 @@ def setup():
 
 
 def draw():
-    scale(10)
+    # scale(10)
     fill(0, 10)
     noStroke()
     rect(0, 0, width, height)
@@ -31,5 +31,5 @@ def draw():
     flock.run()
 
 # Add a boid into the System
-def mousePressed():
-    flock.addBoid(Boid(mouseX, mouseY))
+# def mousePressed():
+#     flock.addBoid(Boid(mouseX, mouseY))
