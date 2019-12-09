@@ -45,21 +45,16 @@ class Estrela():
             translate(self.x, self.y)
             rotate(radians(frameCount))
             apply_override()
-            estrela(0, 0, 10, raio1, 50)
+            if amp > 10:
+                estrela(0, 0, 10, raio1, 50)
+            else:
+                estrela(0, 0, 10, raio1, 5)
             popMatrix()
         if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(-HALF_PI)
             translate(-width / 2, -height / 2)
 
-    # def set_cores(ins, cor, s=None, f=None, sw=None):
-    #     if Estrela.ins_override == 6:
-    #         fill(255,200)
-    #         stroke(255,200)
-    # else:
-    # pass
-    #     if s is None: noStroke()
-    #     if f is None: noFill()
 
     def anda(self, tom=None):
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
