@@ -3,6 +3,7 @@ Com Boids!
 """
 from estrela import Estrela
 add_library('oscP5')  # precisa instalar no IDE do Processing oscP5!
+add_library('sound') # aviso de que vai usar o microfone
 
 ins_override = -1  # -1 é o "normal" sem override
 # definie instrumentos que vão ser ouvidos
@@ -24,17 +25,24 @@ from flock import Flock
 
 flock = Flock()
 
-# def settings():
-#     size(800, 600)
+def settings():
+    size(800, 600)
 
 def setup():
     """ Define área de desenho e popula lista de estrelas """
     global dados, instrumentos, oscP5, novos_dados, estrelas
+    global input, loudness
+
     fullScreen(1)  # testar se 1 vai para segundo monitor
     this.surface.setResizable(True)
     if not Estrela.full_screen:
         this.surface.setSize(600, 800)
     background(0)
+    # Burocracia para receber o som e analisar o volume
+    source = AudioIn(this, 0)
+    source.start()
+    loudness = Amplitude(this)
+    loudness.input(source)
 
     # inicializa OSC
     oscP5 = OscP5(this, 12000)
@@ -58,8 +66,10 @@ def draw():
     noStroke()
     rect(0, 0, width, height)
     if ins_override == 6:
-        amp =  200 * noise(i + frameCount * .02)
-        flock.run(amp)
+        volume = loudness.analyze()
+        tamanho = int(map(volume, 0, 0.5, 30, 350))
+        # amp =  200 * noise(frameCount * .02)
+        flock.run(tamanho)
     else:
         for i, estrela in enumerate(estrelas):
             ins, tom, amp, cor = dados[instrumentos[i]]
@@ -74,7 +84,7 @@ def draw():
         dados[instrumento] = (nins,                  # ins/modo/ins_override
                               lerp(tom, ntom, .2),  # easing "suave"
                               namp,                # sem easing
-                              cor, #(cor + ncor) / 2   # easing "rápido"
+                              ncor, #(cor + ncor) / 2   # easing "rápido"
                               # 360 * noise(i + frameCount * .02)
                               )
 def mock_final(i):
