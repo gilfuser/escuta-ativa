@@ -25,15 +25,17 @@ s.waitForBoot({
 	0.1.wait;
 	"_SoundLib*".loadRelative;
 	0.2.wait;
+	"sons/tunel*".loadRelative;
+	0.2.wait;
 	"_SampleLib*".loadRelative;
 	0.2.wait;
 	"todos_os_tubos_ndefs*".loadRelative;
 	0.2.wait;
-	"FX/fxLib*".loadRelative;
+	"fx/fxLib*".loadRelative;
 	0.4.wait;
 	// "Sons/terra*".loadRelative;
 	// (q.topDir +/+ "FX/FXXX_tubos.scd").openDocument;
-	"FX/FXXX_tubos*".loadRelative;
+	"fx/add_pxChains*".loadRelative;
 	0.2.wait;
 	"modalityInit*".loadRelative;
 	(q.topDir +/+ "modalityInit.scd").openDocument;
@@ -46,6 +48,7 @@ s.waitForBoot({
 	0.2.wait;
 	(q.topDir +/+ "modality_do_stuff.scd").openDocument;
 	0.2.wait;
+	"fx/masterFX*".loadRelative;
 	/*
 	"grava-movimento*".loadRelative;
 	*/

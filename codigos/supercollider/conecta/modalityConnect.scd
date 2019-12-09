@@ -59,7 +59,7 @@ q.verdesol.netip = q.netip;
 Tdef(\setPorts, {
 	loop{
 		if (
-			(q.lilassi.netport == q.netport)  or: (q.vermelhodo1.netport == q.netport) /* or:(q.vermelhodo2.netport == q.netport)*/ or: (q.laranjare.netport == q.netport) or: (q.amarelomi.netport == q.netport)  /*or: (q.verdefa1.netport == q.netport)*/ or: /*(q.verdefa2.netport == q.netport) or:*/ (q.verdesol.netport == q.netport)
+			(q.lilassi.netport == q.netport)  or: (q.vermelhodo1.netport == q.netport) /* or:(q.vermelhodo2.netport == q.netport)*/ or: (q.laranjare.netport == q.netport) or: (q.amarelomi.netport == q.netport)  or: (q.verdefa1.netport == q.netport) or: /*(q.verdefa2.netport == q.netport) or:*/ (q.verdesol.netport == q.netport)
 		)
 		{ fork{ thisProcess.addOSCRecvFunc(~f); 0.025.wait; thisProcess.removeOSCRecvFunc(~f); "setting addrs".postln } }
 		{ "all ports are set".postln; Tdef(\setPorts).stop };
