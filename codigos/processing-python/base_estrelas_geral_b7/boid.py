@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 # The Boid class
+
+from estrela import *
+from cores import *
+
 class Boid(object):
 
     def __init__(self, x, y):
@@ -11,11 +15,11 @@ class Boid(object):
         self.maxspeed = 2
         self.maxforce = 0.03
 
-    def run(self, boids):
+    def run(self, boids, i):
         self.flock(boids)
         self.update()
         self.borders()
-        self.render()
+        self.render(i)
 
     def applyForce(self, force):
         # We could add mass here if we want A = F / M
@@ -61,7 +65,7 @@ class Boid(object):
         steer.limit(self.maxforce)  # Limit to maximum steering force.
         return steer
 
-    def render(self):
+    def render(self, ins):
         # Draw a triangle rotated in the direction of velocity.
         theta = self.velocity.heading2D() + radians(90)
         # heading2D() above is now heading() but leaving old syntax until
@@ -69,9 +73,41 @@ class Boid(object):
         noFill()
         stroke(255)
         strokeWeight(.1)
-        estrela(self.location.x, self.location.y, 
-                10, 40, 80)
-
+        self.x, self.y = self.location.x, self.location.y
+        raio1, raio2 = 100, 25
+        # self.tamanho = amp
+        colorMode(RGB)
+        cor_final = 255
+        stroke(cor_final, 150)
+        strokeJoin(ROUND)
+        if ins in (0, 1, 2, 3, 4, 5):
+            fill(0, 10) # preto bem fraquinho
+            apply_override()
+            estrela(self.x, self.y, 7, raio1 * .6, raio2 * .6)
+        if ins in (6, 7, 8, 9, 10, 11):
+            pushMatrix()
+            translate(self.x, self.y)
+            stroke(cor_final, min(255, 255))
+            apply_override()
+            estrela(0, 0, 4, raio1, raio2)
+            rotate(QUARTER_PI)
+            s = 4 if ins == 5 else 5
+            # cor2 = paleta(s, cor)
+            # stroke(cor2, min(255, amp))
+            apply_override()
+            estrela(0, 0, 4, raio1 * .8, raio2 * .8)
+            popMatrix()
+        if ins in (12, 13, 14, 15, 16, 17):
+            stroke(0)
+            pushMatrix()
+            translate(self.x, self.y)
+            rotate(radians(frameCount))
+            # stroke(cor_final, 230 - min(230, amp))
+            # s = 4 if ins == 5 else 5
+            # stroke(paleta(s, cor))
+            apply_override()
+            estrela(0, 0, 10, raio1, 50)
+            popMatrix()
 
     # Wraparound
     def borders(self):
@@ -157,19 +193,3 @@ class Boid(object):
             return self.seek(sum)  # Steer towards the location.
         else:
             return PVector(0, 0)
-
-
-def estrela(cx, cy, pontas, raio1, raio2):
-    pontos = pontas * 2
-    parte = 360. / pontos
-    beginShape()  # comece a forma!
-    for p in range(pontos):  # para cada p
-        angulo = radians(p * parte)  # calcula angulo
-        if p % 2 == 0:  # se for par
-            raio = raio1
-        else:  # senão, se for impar
-            raio = raio2
-        x = cx + raio * sin(angulo)
-        y = cy + raio * cos(angulo)
-        vertex(x, y)  # vertex é um ponto
-    endShape(CLOSE)  # termina forma
