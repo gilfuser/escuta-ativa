@@ -73,8 +73,8 @@ def draw():
         dados[instrumento] = (nins,                  # ins/modo/ins_override
                               lerp(tom, ntom, .2),  # easing "suave"
                               namp,                # sem easing
-                              # cor, #(cor + ncor) / 2   # easing "rápido"
-                              360 * noise(i + frameCount * .02)
+                              cor, #(cor + ncor) / 2   # easing "rápido"
+                              # 360 * noise(i + frameCount * .02)
                               )
 def mock_final(i):
     cor = 360 * noise(i * 100 + frameCount * .02)
@@ -98,7 +98,7 @@ def setup_dados():
         dados[instrumento] = (
             0,  # ins/modo/ins_override
             0,  # int(random(-24, 24)),
-            100,  # int(random(10, 150)),
+            5,  # int(random(10, 150)),
             0,  # int(random(360)),
         )
     return dados
