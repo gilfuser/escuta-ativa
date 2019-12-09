@@ -1,18 +1,21 @@
 {
 	(
-		q.lilassi.pxChain = ProxyChain.from( Ndef(\lilassi), [ 'pitch', 'wah', 'lpf','analysissi' ] );
 		q.vermelhodo1.pxChain = ProxyChain.from( Ndef(\vermelhodo1), [ 'pitch', 'wah', 'lpf','analysisdo1' ] );
-		q.vermelhodo2.pxChain = ProxyChain.from( Ndef(\vermelhodo2), [ 'pitch', 'wah', 'lpf','analysisdo2' ] );
 		q.laranjare.pxChain = ProxyChain.from( Ndef(\laranjare), [ 'pitch', 'wah', 'lpf','analysisre' ] );
 		q.amarelomi.pxChain = ProxyChain.from( Ndef(\amarelomi), [ 'pitch', 'wah', 'lpf','analysismi' ] );
 		q.verdefa1.pxChain = ProxyChain.from( Ndef(\verdefa1), [ 'pitch', 'wah', 'lpf','analysisfa1' ] );
-		q.verdefa2.pxChain = ProxyChain.from( Ndef(\verdefa2), [ 'pitch', 'wah', 'lpf','analysisfa2' ] );
 		q.verdesol.pxChain = ProxyChain.from( Ndef(\verdesol), [ 'pitch', 'wah', 'lpf','analysissol' ] );
+		q.lilassi.pxChain = ProxyChain.from( Ndef(\lilassi), [ 'pitch', 'wah', 'lpf','analysissi' ] );
 	);
 
 	0.2.wait;
 
-	Ndef('vermelhodo1').set('wet20', 1, 'tdisp', 0.005, 'wet30', 0, 'wet10', 0.5, 'pdisp', 0.005, 'wet40', 0, 'slide', 0.02);
+	q.vermelhodo1.pxChain.set( 'tdisp', 0.005, 'pdisp', 0.005, 'slide', 0.02 );
+	q.laranjare.pxChain.set( 'pideg', 9.0 );
+	q.amarelomi.pxChain.set( 'wphase', 1.5, 'pdisp', 0.005, 'depth', 1.0, 'pideg', 18.0, 'wrate', 0.12, 'jdepth', 0.0, 'jfreq', 0.1, 'sinsaw', 1.0 );
+	q.verdefa1.pxChain.set( 'tdisp', 0.17, 'pdisp', 0.008, 'depth', 1/3, 'pideg', 18.0, 'wrate', 0.15, 'wet10', 0.5, 'sinsaw', 1.0, 'jdepth', 1/3);
+	q.verdesol.pxChain.set( 'tdisp', 0.0, 'pideg', 18.0, 'pdisp', 0.02 );
+	q.lilassi.pxChain.set( 'wphase', 0.5, 'depth', 0.25, 'wrate', 0.05, 'jdepth', 0.25 );
 
 	// [ q.lilassi.pxChain, q.vermelhodo1.pxChain, q.vermelhodo2.pxChain, q.laranjare.pxChain, q.amarelomi.pxChain, q.verdefa1.pxChain, q.verdefa2.pxChain, q.verdesol.pxChain ].do(_.add(\lpf)).do(_.add(\pitch));
 	// [ q.lilassi.pxChain, q.vermelhodo1.pxChain, q.vermelhodo2.pxChain, q.laranjare.pxChain, q.amarelomi.pxChain, q.verdefa1.pxChain, q.verdefa2.pxChain, q.verdesol.pxChain ].do(_.add(\analysis));
@@ -24,14 +27,12 @@
 	q.verdefa2.pxChain.set(\select, 6);
 	q.verdesol.pxChain.set(\select, 7);*/
 
-	q.lilassi.pxChain.add(\analysissi);
-	q.vermelhodo1.pxChain.add(\analysisdo1);
-	q.vermelhodo2.pxChain.add(\analysisdo2);
-	q.laranjare.pxChain.add(\analysisre);
-	q.amarelomi.pxChain.add(\analysismi);
-	q.verdefa1.pxChain.add(\analysisfa1);
-	q.verdefa2.pxChain.add(\analysisfa2);
-	q.verdesol.pxChain.add(\analysissol);
+	q.vermelhodo1.pxChain.add(\pitch, 0.5).add(\analysisdo1);
+	q.laranjare.pxChain.add(\pitch, 0.5).add(\analysisre);
+	q.amarelomi.pxChain.add(\pitch, 0.5).add(\wah, 0.9).add(\analysismi);
+	q.verdefa1.pxChain.add(\wah, 0.9).add(\analysisfa1);
+	q.verdesol.pxChain.add(\wah, 0.9).add(\analysissol);
+	q.lilassi.pxChain.add(\wah, 0.82).add(\analysissi);
 
 	// q.verdesol.pxChain.add(\analysis);
 	//////////////////////////////////////////////////////////////////////

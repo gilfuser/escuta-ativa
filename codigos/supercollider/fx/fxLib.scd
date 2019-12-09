@@ -118,7 +118,7 @@ q.fx = q.fx ? ();
 		var  wring = 0.002, wrq = 0.8,  ggain = 1.25 ;
 		var jitter = LFNoise2.ar(jfreq, jdepth);
 		var mod = Select.kr(sinsaw, [
-			SinOsc.ar( wrate, ( jitter * 2pi) % 2pi, depth).exprange(100, 5000),
+			SinOsc.ar( wrate, wphase + ( jitter * 2pi) % 2pi, depth).exprange(100, 5000),
 			VarSaw.kr(wrate, jitter, 0.1, depth).lag(0.1).exprange(100, 5000),
 		]);
 		var ringz = Ringz.ar( in, mod, wring );
@@ -134,7 +134,7 @@ q.fx = q.fx ? ();
 			\wring, [0.001, 1, \exp],
 			\sinsaw, [0, 1, \lin, 1, 0],
 			\jfreq, [0.1, 10, \exp],
-			\wphase, [0, 1],
+			\wphase, [1.5pi, 0.5pi],
 		]
 	)
 	);

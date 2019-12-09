@@ -9,7 +9,9 @@ q.laranjare = q.laranjare ? ();
 q.amarelomi = q.amarelomi ? ();
 q.verdefa1 = q.verdefa1 ? ();
 q.verdefa2 = q.verdefa2 ? ();
-q.verdesol = q.verdesol ? ();
+q.verdesol = q.verdesol ? ()
+q.scale = Scale.at(\lydianMinor);
+
 // "teste-quark*".loadRelative;
 // Scale.at(\lydianMinor)
 s.waitForBoot({
@@ -27,6 +29,8 @@ s.waitForBoot({
 	0.2.wait;
 	"sons/tunel*".loadRelative;
 	0.2.wait;
+	"sons/acid*".loadRelative;
+	0.2.wait;
 	"_SampleLib*".loadRelative;
 	0.2.wait;
 	"todos_os_tubos_ndefs*".loadRelative;
@@ -38,17 +42,18 @@ s.waitForBoot({
 	"fx/add_pxChains*".loadRelative;
 	0.2.wait;
 	"modalityInit*".loadRelative;
-	(q.topDir +/+ "modalityInit.scd").openDocument;
+	// (q.topDir +/+ "modalityInit.scd").openDocument;
 	0.2.wait;
 	"modalityConnect*".loadRelative;
-	(q.topDir +/+ "modalityConnect.scd").openDocument;
-	0.2.wait;
+	// (q.topDir +/+ "modalityConnect.scd").openDocument;
 	0.2.wait;
 	"modality_do_stuff*".loadRelative;
 	0.2.wait;
-	(q.topDir +/+ "modality_do_stuff.scd").openDocument;
+	// (q.topDir +/+ "modality_do_stuff.scd").openDocument;
 	0.2.wait;
 	"fx/masterFX*".loadRelative;
+	0.2.wait;
+	(q.topDir +/+ "controle.scd").openDocument;
 	/*
 	"grava-movimento*".loadRelative;
 	*/

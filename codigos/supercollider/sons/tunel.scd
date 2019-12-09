@@ -1,6 +1,6 @@
 SynthDef(\tunel, {| out = 0, t_trig=1, amp = 0.4, freq = 440, downsamp = 4, modFQ = 2, att = 0.01, rel = 0.1 |
 	var son, env, noise, bitReduc, down, pan, initPhase;
-	son = SyncSaw.ar( (freq * 0.5).lag3(0.2), freq) * 0.75 + Saw.ar(freq) + ( LFPulse.ar(freq) * 0.5 );
+	son = ( Saw.ar(freq * 0.5, mul: 0.33) + BlitB3Square.ar(freq, mul: 0.33) + LFPulse.ar(freq * 2, mul: 0.33) ).softclip;
 	env = EnvGen.ar( Env.asr(att, 1, rel, [4, -4] ), Trig1.kr(t_trig, att + rel), doneAction: Done.freeSelf );
 	son = RLPF.ar(son, freq);
 	noise = PinkNoise.ar(0.09);
