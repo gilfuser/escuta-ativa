@@ -9,31 +9,34 @@ q.laranjare = q.laranjare ? ();
 q.amarelomi = q.amarelomi ? ();
 q.verdefa1 = q.verdefa1 ? ();
 q.verdefa2 = q.verdefa2 ? ();
-q.verdesol = q.verdesol ? ()
+q.verdesol = q.verdesol ? ();
 q.scale = Scale.at(\lydianMinor);
 
 // "teste-quark*".loadRelative;
 // Scale.at(\lydianMinor)
 s.waitForBoot({
 	/************** OSC OUT ********************/
-	q.net = NetAddr("127.0.0.1"/*"192.168.0.7"*/, 12000); // IP e Port do Processing
-	q.net.sendMsg(\lilassi, 0, 6, 125, 270);
+	q.net = NetAddr(/*"127.0.0.1"*/ "192.168.0.2", 12000); // IP e Port do Processing
 	0.2.wait;
 	/*
 	q.net.disconnect;
 	q.net.connect;
 	*/
 	"globals/0_loadGlobalUtils.scd".loadRelative;
-	0.1.wait;
+	0.2.wait;
+	"todos_os_tubos_ndefs*".loadRelative;
+	0.2.wait;
 	"_SoundLib*".loadRelative;
+	0.2.wait;
+	"_SampleLib*".loadRelative;
 	0.2.wait;
 	"sons/tunel*".loadRelative;
 	0.2.wait;
 	"sons/acid*".loadRelative;
 	0.2.wait;
-	"_SampleLib*".loadRelative;
+	"conecta/listeners*".loadRelative;
 	0.2.wait;
-	"todos_os_tubos_ndefs*".loadRelative;
+	"conecta/triggers*".loadRelative;
 	0.2.wait;
 	"fx/fxLib*".loadRelative;
 	0.4.wait;
@@ -41,16 +44,17 @@ s.waitForBoot({
 	// (q.topDir +/+ "FX/FXXX_tubos.scd").openDocument;
 	"fx/add_pxChains*".loadRelative;
 	0.2.wait;
-	"modalityInit*".loadRelative;
+	"conecta/modalityInit*".loadRelative;
 	// (q.topDir +/+ "modalityInit.scd").openDocument;
 	0.2.wait;
-	"modalityConnect*".loadRelative;
-	// (q.topDir +/+ "modalityConnect.scd").openDocument;
+	"conecta/modalityConnect*".loadRelative;
+	(q.topDir +/+ "conecta/modalityConnect.scd").openDocument;
+	0.4.wait;
+	"conecta/modality_do_stuff*".loadRelative;
 	0.2.wait;
-	"modality_do_stuff*".loadRelative;
-	0.2.wait;
-	// (q.topDir +/+ "modality_do_stuff.scd").openDocument;
-	0.2.wait;
+	// (q.topDir +/+ "conecta/modality_do_stuff.scd").openDocument;
+	// 0.2.wait;
+	// (q.topDir +/+ "dataPlay/8_dataPlay.scd").openDocument;
 	"fx/masterFX*".loadRelative;
 	0.2.wait;
 	(q.topDir +/+ "controle.scd").openDocument;
@@ -58,7 +62,7 @@ s.waitForBoot({
 	"grava-movimento*".loadRelative;
 	*/
 	0.2.wait;
-	().play;
+	(\amp: 0.5).play;
 	// make a window and embed a ServerMeterView inside of it.
 	q.m = Window.new("Server Levels", Rect(1750, 750, 140, 240));
 	ServerMeterView.new(s, q.m, 0@0, 2, 2);

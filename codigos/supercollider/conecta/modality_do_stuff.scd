@@ -87,15 +87,15 @@ fork{
 
 	(
 		[
-			[ MFdef(\do_gyro_yaw), Ndef(\acidDo), 24 ],
-			[ MFdef(\re_gyro_yaw), Ndef(\acidRe), 20 ],
-			[ MFdef(\mi_gyro_yaw), Ndef(\acidMi), 16 ],
-			[ MFdef(\fa_gyro_yaw), Ndef(\acidFa), 12 ],
-			[ MFdef(\sol_gyro_yaw), Ndef(\acidSol), 8 ],
-			[ MFdef(\si_gyro_yaw), Ndef(\acidSi), 4 ],
+			[ MFdef(\do_gyro_yaw), Ndef(\acidDo), 12 ],
+			[ MFdef(\re_gyro_yaw), Ndef(\acidRe), 10 ],
+			[ MFdef(\mi_gyro_yaw), Ndef(\acidMi), 8 ],
+			[ MFdef(\fa_gyro_yaw), Ndef(\acidFa), 6 ],
+			[ MFdef(\sol_gyro_yaw), Ndef(\acidSol), 4 ],
+			[ MFdef(\si_gyro_yaw), Ndef(\acidSi), 2 ],
 		].collect{ |v|
 			v[0].add(\notes, { |el|
-				v[1].set( \freq, q.scale.degreeToFreq(( el.value * 8 - v[2] ).asInteger , 69.midicps, 1) );
+				v[1].set( \freq, q.scale.degreeToFreq(( el.value * 13 ).asInteger , 69.midicps, 0) );
 			});
 			v[0].add(\waveform, { |el|
 				v[1].set( \wform, el.value.lag(0.1) );

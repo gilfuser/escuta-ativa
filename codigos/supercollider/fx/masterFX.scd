@@ -14,7 +14,7 @@ q = q ? ();
 		q.masta.add(\comp, 0.8);  // compressor
 		q.masta.add(\ampFin, 1);  // limit output
 		{q.mastaGui = q.masta.gui('Masta!', 15)}.defer;
-		s.scope(s.options.numOutputBusChannels);
+		{s.scope(s.options.numOutputBusChannels)}.defer;
 	);
 
 	Ndef('zz_mastafx').set('mix', 0.25, 'clamp', 0.03, 'wet30', 1, 'drive', 2, 'relax', 0.35, 'thresh', 0.33, 'slopea', 0.25);

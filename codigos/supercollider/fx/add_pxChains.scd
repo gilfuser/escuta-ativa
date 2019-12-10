@@ -8,6 +8,22 @@
 		q.lilassi.pxChain = ProxyChain.from( Ndef(\lilassi), [ 'pitch', 'wah', 'lpf','analysissi' ] );
 	);
 
+	(
+		q.vermelhodo1.acid = ();
+		q.laranjare.acid = ();
+		q.amarelomi.acid = ();
+		q.verdefa1.acid = ();
+		q.verdesol.acid = ();
+		q.lilassi.acid = ();
+
+		q.vermelhodo1.acid.pxChain = ProxyChain.from( Ndef(\acidDo), [ 'pitch', 'wah', 'lpf','analysisdo1' ] );
+		q.laranjare.acid.pxChain = ProxyChain.from( Ndef(\acidRe), [ 'pitch', 'wah', 'lpf','analysisre' ] );
+		q.amarelomi.acid.pxChain = ProxyChain.from( Ndef(\acidMi), [ 'pitch', 'wah', 'lpf','analysismi' ] );
+		q.verdefa1.acid.pxChain = ProxyChain.from( Ndef(\acidFa), [ 'pitch', 'wah', 'lpf','analysisfa1' ] );
+		q.verdesol.acid.pxChain = ProxyChain.from( Ndef(\acidSol), [ 'pitch', 'wah', 'lpf','analysissol' ] );
+		q.lilassi.acid.pxChain = ProxyChain.from( Ndef(\acidSi), [ 'pitch', 'wah', 'lpf','analysissi' ] );
+	);
+
 	0.2.wait;
 
 	q.vermelhodo1.pxChain.set( 'tdisp', 0.005, 'pdisp', 0.005, 'slide', 0.02 );
@@ -17,15 +33,6 @@
 	q.verdesol.pxChain.set( 'tdisp', 0.0, 'pideg', 18.0, 'pdisp', 0.02 );
 	q.lilassi.pxChain.set( 'wphase', 0.5, 'depth', 0.25, 'wrate', 0.05, 'jdepth', 0.25 );
 
-	// [ q.lilassi.pxChain, q.vermelhodo1.pxChain, q.vermelhodo2.pxChain, q.laranjare.pxChain, q.amarelomi.pxChain, q.verdefa1.pxChain, q.verdefa2.pxChain, q.verdesol.pxChain ].do(_.add(\lpf)).do(_.add(\pitch));
-	// [ q.lilassi.pxChain, q.vermelhodo1.pxChain, q.vermelhodo2.pxChain, q.laranjare.pxChain, q.amarelomi.pxChain, q.verdefa1.pxChain, q.verdefa2.pxChain, q.verdesol.pxChain ].do(_.add(\analysis));
-	/*q.vermelhodo1.pxChain.set(\select, 1);
-	q.vermelhodo2.pxChain.set(\select, 2);
-	q.laranjare.pxChain.set(\select, 3);
-	q.amarelomi.pxChain.set(\select, 4);
-	q.verdefa1.pxChain.set(\select, 5);
-	q.verdefa2.pxChain.set(\select, 6);
-	q.verdesol.pxChain.set(\select, 7);*/
 
 	q.vermelhodo1.pxChain.add(\pitch, 0.5).add(\analysisdo1);
 	q.laranjare.pxChain.add(\pitch, 0.5).add(\analysisre);
@@ -34,6 +41,13 @@
 	q.verdesol.pxChain.add(\wah, 0.9).add(\analysissol);
 	q.lilassi.pxChain.add(\wah, 0.82).add(\analysissi);
 
+	q.vermelhodo1.acid.pxChain.add(\pitch, 0.5).add(\analysisdo1);
+	q.laranjare.acid.pxChain.add(\pitch, 0.5).add(\analysisre);
+	q.amarelomi.acid.pxChain.add(\pitch, 0.5).add(\wah, 0.9).add(\analysismi);
+	q.verdefa1.acid.pxChain.add(\wah, 0.9).add(\analysisfa1);
+	q.verdesol.acid.pxChain.add(\wah, 0.9).add(\analysissol);
+	q.lilassi.acid.pxChain.add(\wah, 0.82).add(\analysissi);
+
 	// q.verdesol.pxChain.add(\analysis);
 	//////////////////////////////////////////////////////////////////////
 	// q.dir = thisProcess.nowExecutingPath.dirname;
@@ -41,12 +55,20 @@
 
 	(
 		{
-			q.lilassi.pxChainG = q.lilassi.pxChain.gui(18).moveTo(610, 600);
 			q.vermelhodo1.pxChainG = q.vermelhodo1.pxChain.gui(18).moveTo(1210, 600);
 			q.laranjare.pxChainG = q.laranjare.pxChain.gui(18).moveTo(10, 160);
 			q.amarelomi.pxChainG = q.amarelomi.pxChain.gui(18).moveTo(610, 160);
 			q.verdefa1.pxChainG = q.verdefa1.pxChain.gui(18).moveTo(1210, 160);
 			q.verdesol.pxChainG = q.verdesol.pxChain.gui(18).moveTo(10, 600);
+			q.lilassi.pxChainG = q.lilassi.pxChain.gui(18).moveTo(610, 600);
+
+			q.vermelhodo1.acid.pxChainG = q.vermelhodo1.acid.pxChain.gui(18).moveTo(1210, 600);
+			q.laranjare.acid.pxChainG = q.laranjare.acid.pxChain.gui(18).moveTo(10, 160);
+			q.amarelomi.acid.pxChainG = q.amarelomi.acid.pxChain.gui(18).moveTo(610, 160);
+			q.verdefa1.acid.pxChainG = q.verdefa1.acid.pxChain.gui(18).moveTo(1210, 160);
+			q.verdesol.acid.pxChainG = q.verdesol.acid.pxChain.gui(18).moveTo(10, 600);
+			q.lilassi.acid.pxChainG = q.lilassi.acid.pxChain.gui(18).moveTo(610, 600);
+
 			// q.guiOrb4 = q.orb4.gui(8).moveTo(0, 0);
 			// q.lilassiPset = NdefPreset( q.lilassi.pxChain.proxy );
 			/* q.o0Pset.namesToStore */

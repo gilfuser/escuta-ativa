@@ -19,7 +19,7 @@
 		[ lilassit, vermelhodo1t, vermelhodo2t, laranjaret, amarelomit, verdefa1t, verdefa2t, verdesolt ]
 	});
 
-	Ndef(\trigs_mov1).gui(10);
+	Ndef(\trigs_mov1).gui(12);
 	// Ndef(\triggers).scope;
 	// Ndef(\triggers2).clear;
 
