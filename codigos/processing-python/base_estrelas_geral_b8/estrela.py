@@ -18,7 +18,7 @@ class Estrela():
         self.tamanho = amp
         colorMode(RGB)
         cor_final = paleta(ins, cor)
-        stroke(cor_final, 150)
+        stroke(cor_final)
         strokeJoin(ROUND)
         if Estrela.full_screen:
             translate(width / 2, height / 2)
@@ -31,7 +31,6 @@ class Estrela():
         if ins in (2, 3):
             pushMatrix()
             translate(self.x, self.y)
-            stroke(cor_final, min(255, amp))
             apply_override()
             estrela(0, 0, 4, raio1, raio2)
             rotate(QUARTER_PI)
@@ -42,29 +41,20 @@ class Estrela():
             estrela(0, 0, 4, raio1 * .8, raio2 * .8)
             popMatrix()
         if ins in (4, 5):
-            stroke(0)
             pushMatrix()
             translate(self.x, self.y)
             rotate(radians(frameCount))
-            stroke(cor_final))
-            # s = 4 if ins == 5 else 5
-            # stroke(paleta(s, cor))
             apply_override()
-            estrela(0, 0, 10, raio1, 50)
+            if amp > 10:
+                estrela(0, 0, 10, raio1, 50)
+            else:
+                estrela(0, 0, 10, raio1, 5)
             popMatrix()
         if Estrela.full_screen:
             translate(width / 2, height / 2)
             rotate(-HALF_PI)
             translate(-width / 2, -height / 2)
 
-    # def set_cores(ins, cor, s=None, f=None, sw=None):
-    #     if Estrela.ins_override == 6:
-    #         fill(255,200)
-    #         stroke(255,200)
-    # else:
-    # pass
-    #     if s is None: noStroke()
-    #     if f is None: noFill()
 
     def anda(self, tom=None):
         """ atualiza a posição do objeto e devolve do lado oposto se sair """
@@ -75,7 +65,7 @@ class Estrela():
         if tom is not None:
             self.x = map(tom, -24, 24, self.tamanho * 2, w - self.tamanho * 2)
         # self.x += self.vx
-        self.vy = -1 * 40 / (tom + 40)
+        self.vy = -.35 * 40 / (tom + 40)
         self.y += self.vy
         tam = self.tamanho
         if self.x > w + tam:
