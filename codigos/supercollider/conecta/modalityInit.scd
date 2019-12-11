@@ -38,27 +38,27 @@ q.lilassi.mktl.elementGroup.keys;
 
 OSCFunc.trace;
 OSCFunc.trace(false);
-q.vermelhodo1.mktl = MKtl(\vermelhodo1, "skmecs-tubo", multiIndex: 1);
-{ q.vermelhodo1.mktl.gui.parent.alwaysOnTop_(true) }.defer;
-// q.vermelhodo1.mktl.device.updateSrcAddr("192.168.0.3", 51614);
+q.vermelhodo.mktl = MKtl(\vermelhodo1, "skmecs-tubo", multiIndex: 1);
+{ q.vermelhodo.mktl.gui.parent.alwaysOnTop_(true) }.defer;
+// q.vermelhodo.mktl.device.updateSrcAddr("192.168.0.3", 51614);
 // tell the collectives action to ...
-q.vermelhodo1.mktl.collectivesDict[\vermelhodo1].action = { |coll|
-	q.vermelhodo1.mktl.elAt(\accel).action.value(q.vermelhodo1.mktl.elAt(\accel));
+q.vermelhodo.mktl.collectivesDict[\vermelhodo1].action = { |coll|
+	q.vermelhodo.mktl.elAt(\accel).action.value(q.vermelhodo.mktl.elAt(\accel));
 	coll.do { |elem| elem.action.value(elem) };
-	q.vermelhodo1.mktl.elAt(\gyro).action.value(q.vermelhodo1.mktl.elAt(\gyro));
+	q.vermelhodo.mktl.elAt(\gyro).action.value(q.vermelhodo.mktl.elAt(\gyro));
 	coll.do { |elem| elem.action.value(elem) };
 };
-q.vermelhodo1.mktl.resetActions;
+q.vermelhodo.mktl.resetActions;
 
-q.vermelhodo2.mktl = MKtl(\vermelhodo2, "skmecs-tubo", multiIndex: 2);
-// q.vermelhodo2.mktl.gui.parent.alwaysOnTop_(true);
-q.vermelhodo2.mktl.collectivesDict[\vermelhodo2].action = { |coll|
-	q.vermelhodo2.mktl.elAt(\accel).action.value(q.vermelhodo2.mktl.elAt(\accel));
+q.vermelhodo.mktl2 = MKtl(\vermelhodo2, "skmecs-tubo", multiIndex: 2);
+{ q.vermelhodo.mktl2.gui.parent.alwaysOnTop_(true) }.defer;
+q.vermelhodo.mktl2.collectivesDict[\vermelhodo2].action = { |coll|
+	q.vermelhodo.mktl2.elAt(\accel).action.value(q.vermelhodo.mktl2.elAt(\accel));
 	coll.do { |elem| elem.action.value(elem) };
-	q.vermelhodo2.mktl.elAt(\gyro).action.value(q.vermelhodo2.mktl.elAt(\gyro));
+	q.vermelhodo.mktl2.elAt(\gyro).action.value(q.vermelhodo.mktl2.elAt(\gyro));
 	coll.do { |elem| elem.action.value(elem) };
 };
-q.vermelhodo2.mktl.resetActions;
+q.vermelhodo.mktl2.resetActions;
 
 q.laranjare.mktl = MKtl(\laranjare, "skmecs-tubo", multiIndex: 3);
 { q.laranjare.mktl.gui.parent.alwaysOnTop_(true) }.defer;
@@ -82,29 +82,26 @@ q.amarelomi.mktl.collectivesDict[\amarelomi].action = { |coll|
 };
 q.amarelomi.mktl.resetActions;
 
-q.verdefa1.mktl = MKtl(\verdefa1, "skmecs-tubo", multiIndex: 5);
-{ q.verdefa1.mktl.gui.parent.alwaysOnTop_(true) }.defer;
-// q.verdefa1.mktl.device.updateSrcAddr("192.168.0.7", 51615);
-q.verdefa1.mktl.collectivesDict[\verdefa1].action = { |coll|
-	q.verdefa1.mktl.elAt(\accel).action.value(q.verdefa1.mktl.elAt(\accel));
+q.verdefa.mktl = MKtl(\verdefa1, "skmecs-tubo", multiIndex: 5);
+{ q.verdefa.mktl.gui.parent.alwaysOnTop_(true) }.defer;
+// q.verdefa.mktl.device.updateSrcAddr("192.168.0.7", 51615);
+q.verdefa.mktl.collectivesDict[\verdefa1].action = { |coll|
+	q.verdefa.mktl.elAt(\accel).action.value(q.verdefa.mktl.elAt(\accel));
 	coll.do { |elem| elem.action.value(elem) };
-	q.verdefa1.mktl.elAt(\gyro).action.value(q.verdefa1.mktl.elAt(\gyro));
+	q.verdefa.mktl.elAt(\gyro).action.value(q.verdefa.mktl.elAt(\gyro));
 	coll.do { |elem| elem.action.value(elem) };
 };
-q.verdefa1.mktl.resetActions;
+q.verdefa.mktl.resetActions;
 
-q.verdefa2.mktl = MKtl(\verdefa2, "skmecs-tubo", multiIndex: 6);
-/*
-q.verdefa2.mktl.gui.parent.alwaysOnTop_(true);
-q.verdefa2.mktl.device.updateSrcAddr("192.168.0.7", 51615);
-*/
-q.verdefa2.mktl.collectivesDict[\verdefa2].action = { |coll|
-	q.verdefa2.mktl.elAt(\accel).action.value(q.verdefa2.mktl.elAt(\accel));
+q.verdefa.mktl2 = MKtl(\verdefa2, "skmecs-tubo", multiIndex: 6);
+{ q.verdefa.mktl2.gui.parent.alwaysOnTop_(true) }.defer;
+q.verdefa.mktl2.collectivesDict[\verdefa2].action = { |coll|
+	q.verdefa.mktl2.elAt(\accel).action.value(q.verdefa.mktl2.elAt(\accel));
 	coll.do { |elem| elem.action.value(elem) };
-	q.verdefa2.mktl.elAt(\gyro).action.value(q.verdefa2.mktl.elAt(\gyro));
+	q.verdefa.mktl2.elAt(\gyro).action.value(q.verdefa.mktl2.elAt(\gyro));
 	coll.do { |elem| elem.action.value(elem) };
 };
-q.verdefa2.mktl.resetActions;
+q.verdefa.mktl2.resetActions;
 
 q.verdesol.mktl = MKtl(\verdesol, "skmecs-tubo", multiIndex: 7);
 { q.verdesol.mktl.gui.parent.alwaysOnTop_(true) }.defer;

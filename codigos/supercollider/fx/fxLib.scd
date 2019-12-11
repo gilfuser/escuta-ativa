@@ -221,42 +221,13 @@ q.fx = q.fx ? ();
 	verdesol
 	laranjare
 	verdefa
-	vermelhodo1
+	vermelhodo
 	vermelhodo2
 	amarelosi
 	roxomi
 	steve reich
 	ligeti
 	*/
-
-	/*ProxyChain.add3(
-		\analysis,  \filter -> { | in |
-			var freq, hasFreq, in_copy, amp, trig, trigHf, trigF;
-			in_copy = in;
-			// in_copy = HPF2Casc.ar( in, 40, 8 );
-			// in_copy = Compander.ar( in_copy, in_copy, 0.05, slopeBelow: 8 );
-			amp = Amplitude.kr( in_copy, 0.05, 0.05 );
-			// # freq, hasFreq  = Tartini.kr( in, 0.93, 1024, 512, 512 );
-			trig = Impulse.kr(\rate.kr(8));
-			Select.kr( \select.kr(0).asInteger, [
-				SendReply.kr( trig, '/analysissi', amp[0] ),
-				SendReply.kr( trig, '/analysisdo1', amp[0] ),
-				SendReply.kr( trig, '/analysisdo2', amp[0] ),
-				SendReply.kr( trig, '/analysisre', amp[0] ),
-				SendReply.kr( trig, '/analysismi', amp[0] ),
-				SendReply.kr( trig, '/analysisfa1', amp[0] ),
-				SendReply.kr( trig, '/analysisfa2', amp[0] ),
-				SendReply.kr( trig, '/analysissol', amp[0] ),
-			]);
-			// SendReply.kr( trigF, '/freq', freq, amp );
-			in;
-		},
-		1,
-		(
-			\rate: [8, 60, \lin, 1, 8],
-			\select: [0, 7, \lin, 1, 1],
-		)
-	);*/
 
 	ProxyChain.add3(
 		\analysissi,  \filter -> { | in |
@@ -270,21 +241,10 @@ q.fx = q.fx ? ();
 	);
 
 	ProxyChain.add3(
-		\analysisdo1,  \filter -> { | in |
+		\analysisdo,  \filter -> { | in |
 			var trig = Impulse.kr(\rate.kr(8));
 			var amp = Amplitude.kr( in, 0.05, 0.05 );
-			SendReply.kr( trig, '/analysisdo1', amp[0] );
-			in;
-		},
-		1,
-		( \rate: [8, 60, \lin, 1, 8] )
-	);
-
-	ProxyChain.add3(
-		\analysisdo2,  \filter -> { | in |
-			var trig = Impulse.kr(\rate.kr(8));
-			var amp = Amplitude.kr( in, 0.05, 0.05 );
-			SendReply.kr( trig, '/analysisdo2', amp[0] );
+			SendReply.kr( trig, '/analysisdo', amp[0] );
 			in;
 		},
 		1,
@@ -314,21 +274,10 @@ q.fx = q.fx ? ();
 	);
 
 	ProxyChain.add3(
-		\analysisfa1,  \filter -> { | in |
+		\analysisfa,  \filter -> { | in |
 			var trig = Impulse.kr(\rate.kr(8));
 			var amp = Amplitude.kr( in, 0.05, 0.05 );
-			SendReply.kr( trig, '/analysisfa1', amp[0] );
-			in;
-		},
-		1,
-		( \rate: [8, 60, \lin, 1, 8] )
-	);
-
-	ProxyChain.add3(
-		\analysisfa2,  \filter -> { | in |
-			var trig = Impulse.kr(\rate.kr(8));
-			var amp = Amplitude.kr( in, 0.05, 0.05 );
-			SendReply.kr( trig, '/analysisfa2', amp[0] );
+			SendReply.kr( trig, '/analysisfa', amp[0] );
 			in;
 		},
 		1,

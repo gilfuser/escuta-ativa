@@ -1,19 +1,16 @@
 // * now in SC, check whether OSC messages arrive:
 q.netport = NetAddr.localAddr.port;
 q.lilassi.netport = q.netport;
-q.vermelhodo1.netport = q.netport;
-q.vermelhodo2.netport = q.netport;
+q.vermelhodo.netport = q.netport;
 q.laranjare.netport = q.netport;
 q.amarelomi.netport = q.netport;
 q.verdesol.netport = q.netport;
 q.netip = NetAddr.localAddr.ip;
 q.lilassi.netip = q.netip;
-q.vermelhodo1.netip = q.netip;
-q.vermelhodo2.netip = q.netip;
+q.vermelhodo.netip = q.netip;
 q.laranjare.netip = q.netip;
 q.amarelomi.netip = q.netip;
-q.verdefa1.netip = q.netIP;
-q.verdefa2.netip = q.netIP;
+q.verdefa.netip = q.netIP;
 q.verdesol.netip = q.netip;
 
 
@@ -26,12 +23,12 @@ q.verdesol.netip = q.netip;
 		q.lilassi.netip = addr.ip; q.lilassi.netport = addr.port; "set lilassi netaddr".postln;
 	}
 	{'/vermelhodo1'} {
-		q.vermelhodo1.mktl.device.updateSrcAddr( addr.ip, addr.port );
-		q.vermelhodo1.netip = addr.ip; q.vermelhodo1.netport = addr.port; "set vermelhodo1 netaddr".postln;
+		q.vermelhodo.mktl.device.updateSrcAddr( addr.ip, addr.port );
+		q.vermelhodo.netip = addr.ip; q.vermelhodo.netport = addr.port; "set vermelhodo1 netaddr".postln;
 	}
 	{'/vermelhodo2'} {
-		q.vermelhodo2.mktl.device.updateSrcAddr( addr.ip, addr.port);
-		q.vermelhodo2.netip = addr.ip; q.vermelhodo2.netport = addr.port; "set vermelhodo2 netaddr".postln;
+		q.vermelhodo.mktl2.device.updateSrcAddr( addr.ip, addr.port);
+		q.vermelhodo.netip = addr.ip; q.vermelhodo.netport = addr.port; "set vermelhodo2 netaddr".postln;
 	}
 	{'/laranjare'} {
 		q.laranjare.mktl.device.updateSrcAddr( addr.ip, addr.port);
@@ -42,12 +39,12 @@ q.verdesol.netip = q.netip;
 		q.amarelomi.netip = addr.ip; q.amarelomi.netport = addr.port; "set amarelomi netaddr ".postln;
 	}
 	{'/verdefa1'} {
-		q.verdefa1.mktl.device.updateSrcAddr( addr.ip, addr.port );
-		q.verdefa1.netip = addr.ip; q.verdefa1.netport = addr.port; "set verdefa1 netaddr ".postln;
+		q.verdefa.mktl.device.updateSrcAddr( addr.ip, addr.port );
+		q.verdefa.netip = addr.ip; q.verdefa.netport = addr.port; "set verdefa1 netaddr ".postln;
 	}
 	{'/verdefa2'} {
-		q.verdefa2.mktl.device.updateSrcAddr( addr.ip, addr.port );
-		q.verdefa2.netip = addr.ip; q.verdefa2.netport = addr.port; "set verdefa2 netaddr ".postln;
+		q.verdefa.mktl2.device.updateSrcAddr( addr.ip, addr.port );
+		q.verdefa.netip = addr.ip; q.verdefa.netport = addr.port; "set verdefa2 netaddr ".postln;
 	}
 	{'/verdesol'} {
 		q.verdesol.mktl.device.updateSrcAddr( addr.ip, addr.port );
@@ -59,7 +56,7 @@ q.verdesol.netip = q.netip;
 Tdef(\setPorts, {
 	loop{
 		if (
-			(q.lilassi.netport == q.netport)  or: (q.vermelhodo1.netport == q.netport) /* or:(q.vermelhodo2.netport == q.netport)*/ or: (q.laranjare.netport == q.netport) or: (q.amarelomi.netport == q.netport)  or: (q.verdefa1.netport == q.netport) or: (q.verdefa2.netport == q.netport) or: (q.verdesol.netport == q.netport)
+			(q.lilassi.netport == q.netport)  or: (q.vermelhodo.netport == q.netport) or: (q.laranjare.netport == q.netport) or: (q.amarelomi.netport == q.netport)  or: (q.verdefa.netport == q.netport) or: (q.verdesol.netport == q.netport)
 		)
 		{ fork{ thisProcess.addOSCRecvFunc(~f); 0.025.wait; thisProcess.removeOSCRecvFunc(~f); "setting addrs".postln } }
 		{ "all ports are set".postln; Tdef(\setPorts).stop };

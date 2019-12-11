@@ -1,9 +1,10 @@
+(
 SynthDef(\tunel, {| out = 0, t_trig=1, amp = 0.4, freq = 440, downsamp = 4, modFQ = 2, att = 0.01, rel = 0.1 |
 	var son, env, noise, bitReduc, down, pan, initPhase;
 	son = ( Saw.ar(freq * 0.5, mul: 0.5) + BlitB3Square.ar(freq, mul: 0.25) + LFPulse.ar(freq * 2, mul: 0.25) ).softclip * 1.5;
 	env = EnvGen.ar( Env.asr(att, 1, rel, [4, -4] ), Trig1.kr(t_trig, att + rel), doneAction: Done.freeSelf );
 	son = RLPF.ar(son, freq);
-	noise = PinkNoise.ar(0.09);
+	noise = PinkNoise.ar(0.15);
 	bitReduc = ( son + noise ).round(0.5 ** 8);
 	down = Latch.ar(bitReduc, Impulse.ar(SampleRate.ir / downsamp.max(2)));
 	initPhase = {1.rrand(0.01)};
@@ -12,10 +13,10 @@ SynthDef(\tunel, {| out = 0, t_trig=1, amp = 0.4, freq = 440, downsamp = 4, modF
 	son = son * pan * env;
 	OffsetOut.ar(out, son * amp);
 }, [\ir]).add;
-
-q.vermelhodo1.tunel = NPVoicer(Ndef(\tunelDo));
-q.vermelhodo1.tunel.prime(\tunel);
-q.vermelhodo1.tunel.play( Ndef(\vermelhodo1).bus );
+);
+q.vermelhodo.tunel = NPVoicer(Ndef(\tunelDo));
+q.vermelhodo.tunel.prime(\tunel);
+q.vermelhodo.tunel.play( Ndef(\vermelhodo).bus );
 
 q.laranjare.tunel = NPVoicer(Ndef(\tunelRe));
 q.laranjare.tunel.prime(\tunel);
@@ -25,9 +26,9 @@ q.amarelomi.tunel = NPVoicer(Ndef(\tunelMi));
 q.amarelomi.tunel.prime(\tunel);
 q.amarelomi.tunel.play( Ndef(\amarelomi).bus );
 
-q.verdefa1.tunel = NPVoicer(Ndef(\tunelFa));
-q.verdefa1.tunel.prime(\tunel);
-q.verdefa1.tunel.play( Ndef(\verdefa1).bus );
+q.verdefa.tunel = NPVoicer(Ndef(\tunelFa));
+q.verdefa.tunel.prime(\tunel);
+q.verdefa.tunel.play( Ndef(\verdefa).bus );
 
 q.verdesol.tunel = NPVoicer(Ndef(\tunelSol));
 q.verdesol.tunel.prime(\tunel);
@@ -36,14 +37,6 @@ q.verdesol.tunel.play( Ndef(\verdesol).bus );
 q.lilassi.tunel = NPVoicer(Ndef(\tunelSi));
 q.lilassi.tunel.prime(\tunel);
 q.lilassi.tunel.play( Ndef(\lilassi).bus );
-
-q.vermelhodo2.tunel = NPVoicer(Ndef(\tunelDo));
-q.vermelhodo2.tunel.prime(\tunel);
-q.vermelhodo2.tunel.play;
-
-q.verdefa2.tunel = NPVoicer(Ndef(\tunelFa));
-q.verdefa2.tunel.prime(\tunel);
-q.verdefa2.tunel.play;
 
 /*Ndef(\tunelDo, {| amp = 0.4, freq = 440, downsamp = 4, modFQ = 2, att = 2, rel = 4 |
 	var son = LFPulse.ar(freq);

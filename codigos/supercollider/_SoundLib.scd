@@ -651,7 +651,7 @@ SynthDef(\drum3,{|out=0, t_trig=1, freq, freqMul=4, decay=0.1, fdecay=0.02, rq=0
 
 // SKMECS STUFF
 
-SynthDef(\acid, { | out freq gate = 1 pan acof = 2000 arez = 0.5 adist = 0.5 lagt = 0.5 wform = 0 att = 0.04 decay = 0.2 amp = 1 sustain = 1 rel = 1 |
+/*SynthDef(\acid, { | out freq gate = 1 pan acof = 2000 arez = 0.5 adist = 0.5 lagt = 0.5 wform = 0 att = 0.04 decay = 0.2 amp = 1 sustain = 1 rel = 1 |
 	var waves = [ DPW4Saw.ar( freq.lag2(lagt), 0.75 ),  Pulse.ar( freq.lag2(lagt) ) ];
 	var snd = SelectX.ar( wform, waves )!2/*( s.options.numOutputBusChannels )*/;
 	var env = EnvGen.kr(Env.adsr(att, decay, amp * 0.5, rel), gate, doneAction: Done.freeSelf);
@@ -663,7 +663,7 @@ SynthDef(\acid, { | out freq gate = 1 pan acof = 2000 arez = 0.5 adist = 0.5 lag
 	snd = snd + PitchShift.ar(snd, 0.1, 1.0, 0.02, 0.2);
 	// snd.ring2;
     OffsetOut.ar( out, Pan2.ar( snd, pan ) * amp )
-}).add;
+}).add;*/
 
 SynthDef(\bow, { | out, freq, amp=0.5, force=1, gate=1, pos=0.07, c1=0.25, c3=31, pan, rel=0.1 |
 	var vib = Gendy1.kr(1,1,1,1,0.1, 4,mul:0.003,add:1);
@@ -756,6 +756,21 @@ SynthDef(\tunel2, { |freq|
 	son = RLPF.ar(son, freq) * env;
 	Out.ar(\out.kr, Pan2.ar(son * \amp.kr(0.01), \pos.kr(0)) );
 }).add;
+
+/*SynthDef(\tunel, {| out = 0, t_trig=1, amp = 0.4, freq = 440, downsamp = 4, modFQ = 2, att = 0.01, rel = 0.1 |
+	var son, env, noise, bitReduc, down, pan, initPhase;
+	son = ( Saw.ar(freq * 0.5, mul: 0.5) + BlitB3Square.ar(freq, mul: 0.25) + LFPulse.ar(freq * 2, mul: 0.25) ).softclip * 1.5;
+	env = EnvGen.ar( Env.asr(att, 1, rel, [4, -4] ), Trig1.kr(t_trig, att + rel), doneAction: Done.freeSelf );
+	son = RLPF.ar(son, freq);
+	noise = PinkNoise.ar(0.09);
+	bitReduc = ( son + noise ).round(0.5 ** 8);
+	down = Latch.ar(bitReduc, Impulse.ar(SampleRate.ir / downsamp.max(2)));
+	initPhase = {1.rrand(0.01)};
+	pan = LFTri.ar(modFQ, [initPhase, 1 - initPhase ]);
+	son = son.ring3(down) /*+ son*/;
+	son = son * pan * env;
+	OffsetOut.ar(out, son * amp);
+}, [\ir]).add;*/
 
 //////////////////////// E.o. JKvK lib /////////////////////////////////
 // (instrument: \tunel2).play

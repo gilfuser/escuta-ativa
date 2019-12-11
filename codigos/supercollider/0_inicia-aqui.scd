@@ -3,12 +3,10 @@
 (
 q = q ? ();
 q.lilassi = q.lilassi ? ();
-q.vermelhodo1 = q.vermelhodo1 ? ();
-q.vermelhodo2 = q.vermelhodo2 ? ();
+q.vermelhodo = q.vermelhodo ? ();
 q.laranjare = q.laranjare ? ();
 q.amarelomi = q.amarelomi ? ();
-q.verdefa1 = q.verdefa1 ? ();
-q.verdefa2 = q.verdefa2 ? ();
+q.verdefa = q.verdefa ? ();
 q.verdesol = q.verdesol ? ();
 q.scale = Scale.at(\lydianMinor);
 
@@ -16,7 +14,7 @@ q.scale = Scale.at(\lydianMinor);
 // Scale.at(\lydianMinor)
 s.waitForBoot({
 	/************** OSC OUT ********************/
-	q.net = NetAddr(/*"127.0.0.1"*/ "192.168.0.2", 12000); // IP e Port do Processing
+	q.net = NetAddr( /*"127.0.0.1"*/ "192.168.0.2", 12000); // IP e Port do Processing
 	0.2.wait;
 	/*
 	q.net.disconnect;

@@ -1,24 +1,24 @@
 // OSCdef(\verdefa1).clear;
 //
 
-q.lilassi.data = q.lilassi.data ? [];
-q.vermelhodo1.data = q.vermelhodo1.data ? [];
-q.vermelhodo2.data = q.vermelhodo2.data ? [];
+q.vermelhodo.data = q.vermelhodo.data ? [];
+// q.vermelhodo2.data = q.vermelhodo2.data ? [];
 q.laranjare.data = q.laranjare.data ? [];
 q.amarelomi.data = q.amarelomi.data ? [];
-q.verdefa1.data = q.verdefa1.data ? [];
-q.verdefa2.data = q.verdefa2.data ? [];
+q.verdefa.data = q.verdefa.data ? [];
+// q.verdefa2.data = q.verdefa2.data ? [];
 q.verdesol.data = q.verdesol.data ? [];
+q.lilassi.data = q.lilassi.data ? [];
 (
 OSCdef(\do1_to_P5, { |msg|
 	var ins = 0;
-	var tom = (q.vermelhodo1.mktl.elAt(\gyro, \yaw).value * 8 * 3 - 11 ).asInteger;
+	var tom = (q.vermelhodo.mktl.elAt(\gyro, \yaw).value * 8 * 3 - 11 ).asInteger;
 	var amp = ( msg[3] * 10000 + 10 ).asInteger;
-	var cor = (q.vermelhodo1.mktl.elAt(\gyro, \roll).value * 360).asInteger;
+	var cor = (q.vermelhodo.mktl.elAt(\gyro, \roll).value * 360).asInteger;
 	// var data = msg[3..];
 	q.net.sendMsg( \vermelhodo1, ins, tom, amp, cor );
-	q.vermelhodo1.data = [ \vermelhodo1, ins, tom, amp, cor ];
-}, '/analysisdo1');
+	q.vermelhodo.data = [ \vermelhodo1, ins, tom, amp, cor ];
+}, '/analysisdo');
 );
 (
 OSCdef(\do2_to_P5, { |msg|

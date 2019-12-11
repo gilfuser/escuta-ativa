@@ -7,7 +7,7 @@ SynthDef(\simpsamp, { |out, buf, amp=0.1, rate = 1, pan=0, start|
 	var snd = PlayBuf.ar(1,
 		buf, rate, 1,
 		start * BufSampleRate.ir(buf),
-		0, 2, doneAction:2
+		loop: 0, doneAction:Done.freeSelf
 	);
 	Out.ar(out, Pan2.ar(snd, pan, amp));
 }).add;
@@ -19,7 +19,7 @@ SynthDef(\simpsampGlitch, { |out, buf, amp=0.1, rate = 1, pan=0, start|
 	snd = PlayBuf.ar(1,
 		buf, rate, 1,
 		start * BufSampleRate.ir(buf),
-		0, 2, doneAction:2
+		loop: 0, doneAction:Done.freeSelf
 	);
 	Out.ar(out, Pan2.ar(snd, pan, amp));
 }).add;
@@ -29,7 +29,7 @@ SynthDef(\sampEnv, { |out, buf, amp=0.1, rate = 1, pan, start, sustain=0.8|
 	var snd = PlayBuf.ar(1,
 		buf, rate, 1,
 		start * BufSampleRate.ir(buf),
-		0, 2
+		loop: 0, doneAction:Done.freeSelf
 	);
 	var env = EnvGen.ar(Env.linen(0.001, sustain, 0.001), doneAction: 2);
 	Out.ar(out, Pan2.ar(snd * env, pan, amp))
@@ -40,7 +40,7 @@ SynthDef(\simpsamp_st, { |out, buf, amp=0.1, rate = 1, start|
 	var snd = PlayBuf.ar(2,
 		buf, rate, 1,
 		start * BufSampleRate.ir(buf),
-		0, 2, doneAction:2
+		loop: 0, doneAction:Done.freeSelf
 	);
 	Out.ar(out, snd * amp);
 }).add;
@@ -48,7 +48,7 @@ SynthDef(\sampEnv_st, { |out, buf, amp=0.1, rate = 1,start, sustain=0.8|
 	var snd = PlayBuf.ar(2,
 		buf, rate, 1,
 		start * BufSampleRate.ir(buf),
-		0, 2
+		loop: 0, doneAction:Done.freeSelf
 	);
 	var env = EnvGen.ar(Env.linen(0.001, sustain, 0.001), doneAction: 2);
 	Out.ar(out, snd * env * amp)
