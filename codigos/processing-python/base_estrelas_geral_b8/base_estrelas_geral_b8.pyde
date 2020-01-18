@@ -26,7 +26,7 @@ from flock import Flock
 flock = Flock()
 
 def settings():
-    size(800, 600)
+    size(600, 800)
 
 def setup():
     """ Define área de desenho e popula lista de estrelas """
@@ -34,6 +34,7 @@ def setup():
     global input, loudness
 
     fullScreen(1)  # testar se 1 vai para segundo monitor
+    smooth(16)
     this.surface.setResizable(True)
     if not Estrela.full_screen:
         this.surface.setSize(600, 800)
@@ -132,6 +133,9 @@ def keyPressed():
             this.surface.setLocation(0, 0)
         else:
             this.surface.setSize(600, 800)
+    if key == 'm':
+        Estrela.mock = not Estrela.mock
+        print Estrela.mock
 
 def mouseDragged():
     this.surface.setLocation(mouseX, mouseY)

@@ -1,4 +1,4 @@
-22# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from cores import *
 
 class Estrela():
@@ -6,13 +6,16 @@ class Estrela():
     """ Classe Estrela, cor sorteada, tamanho sorteado por default """
     full_screen = False
     ins_override = -1
-
+    sw = 1.5
+    mock = False
     def __init__(self, x, y, tam=100):
         self.x, self.y = x, y
         self.tamanho = tam
         self.vy = -0.5
 
     def desenha(self, ins, cor, amp):
+        if Estrela.mock:
+            amp = 500 * noise(ins + (frameCount + cor) * 0.02)
         """ Desenha polígono em torno das coordenadas do objeto """
         raio1, raio2 = amp, amp / 4
         self.tamanho = amp
@@ -65,7 +68,7 @@ class Estrela():
         if tom is not None:
             self.x = map(tom, -24, 24, self.tamanho * 2, w - self.tamanho * 2)
         # self.x += self.vx
-        self.vy = -.35 * 40 / (tom + 40)
+        self.vy = -.5 * 40 / (tom + 40) # -.35 * 40 / (tom + 40)
         self.y += self.vy
         tam = self.tamanho
         if self.x > w + tam:
@@ -81,9 +84,10 @@ def apply_override():
     if Estrela.ins_override == 6:
         stroke(255)
         noFill()
-        strokeWeight(1)
+        strokeWeight(Estrela.sw)
 
 def estrela(cx, cy, pontas, raio1, raio2):
+    strokeWeight(Estrela.sw)
     pontos = pontas * 2
     parte = 360. / pontos
     beginShape()  # comece a forma!
