@@ -217,18 +217,6 @@ q.fx = q.fx ? ();
 		(\leak: [0.5, 0.999, \exp])
 	);
 
-	/*
-	verdesol
-	laranjare
-	verdefa
-	vermelhodo
-	vermelhodo2
-	amarelosi
-	roxomi
-	steve reich
-	ligeti
-	*/
-
 	ProxyChain.add3(
 		\analysissi,  \filter -> { | in |
 			var trig = Impulse.kr(\rate.kr(8));
@@ -295,117 +283,6 @@ q.fx = q.fx ? ();
 		( \rate: [8, 60, \lin, 1, 8] )
 	);
 
-	/*ProxyChain.add3(
-		\digimod,  \filter -> { | in |
-			var bitReduc = (in + HPF.ar(PinkNoise.ar(0.09), 2500)).round(0.5 ** 8);
-			var down = Latch.ar(bitReduc, Impulse.ar(SampleRate.ir / \downsamp.kr(4).max(2)));
-			var panMod = LFTri.ar( \modFQ.kr(2), [0, 1] );
-			var pan = down * panMod;
-			pan
-		},
-		1,
-		(
-			\downsamp: [1, 32, \lin, 1, 1],
-			\modFQ: [0.25, 2.5],
-		)
-	);*/
-
-
-
-	/*(
-	(
-	SynthDef( \soundAnalysis,{
-	var in, freq, hasFreq, trigHf, trigF, trigA, out, trig, amp, rate = 10;
-	in = InFeedback.ar(Ndef(\playBuf).bus);
-	// in = Compander.ar( in, in, 0.05, slopeBelow: 8 );
-	amp = Amplitude.kr( in, 0.05, 0.05 );
-	freq = Tartini.kr( in, 0.93, 1024, 512, 512 );
-	trig = Impulse.kr(rate);
-	SendReply.kr( trig, '/analysis', [ amp, freq[0], freq[1] ] );
-	}).add;
-	);
-
-	a = Synth(\soundAnalysis);
-	/*
-	a.free;
-	OSCdef(\listener).free;
-	*/
-
-
-	)*/
-
-	/*ProxyChain.add3(
-	\delay,  \filter -> { |in, buf = 1, gain = 1, dur = 1, feedback = 0.7, interp = 1, freq=2000, lag = 0|
-	var index = Phasor.ar( 0, Ramp.kr( dur.reciprocal, lag ), 0, buf.numFrames );
-	var delout = BufRd.ar( 1, buf.bufnum, index, 0, 1 );
-	IBufWr.ar( BPF.ar( (in * gain) + (delout * feedback), freq, 1 ), buf.bufnum, index, interp );
-	delout!2;
-	},
-	1,
-	(
-	\buf: [0, 76, \lin, 1, 1],
-	\gain: [0, 1, \amp],
-	\dur: [0.1, 4],
-	\feedback: [0, 1],
-	\interp: [0,1,\lin,1,1],
-	\lag: [0,1]
-	)
-	);*/
-
-	//hole
-
-	/*
-	\damp, [0, 1]);
-	\hrate, [0, 2]);
-	\hsize, [0.5, 3]);
-	\hdif, [0, 1]);
-	\hfb, [0, 1]);
-
-	*/
 	"\n FX Library -> ProxyChain - LOADED \n ".postln;
 
 }.fork;
-/*
-(
-q = q ? ();
-q.numChans = 6;
-// add a sound source
-(
-ProxyChain.add(
-\tambs, \mix -> {In.ar(4, 2)},
-
-\folD, \filterIn -> { |in, driveD=0.2, thresD=0.9 | var ampD=2.0;
-ampD = driveD.reciprocal/*linlin()*/;
-(in.asArray[[0, 1]] * driveD).fold2(thresD) * ampD },
-
-\cliP, \filterIn -> { |in, driveP=0.5, thresP=2.5/*,ampP=1 */ | var ampP=1;
-//Select.kr(drivec > 40, [ampc.range(0.0, 1), ampc.range(0.5,1.5)]);
-ampP = thresP.reciprocal * driveP.reciprocal + (driveP/1500);
-(in.asArray[[0, 1]] * driveP).clip2(thresP) * (ampP/*.reciprocal*/) },
-
-//  \limiter, \filter -> { |in, preAmp=1, limit=1, ampX=1| Limiter.ar(in * preAmp, limit) * ampX }
-);
-);
-
-
-//Select.ar(pure < folds, [{sig=sig}, {Select.ar(folds < clips, [{sig=folD}, {sig=cliP}])}]);
-
-
-(
-Spec.add(\driveD, [0.2, 20, \exp]);
-Spec.add(\thresD, [0.25, 2.5, \exp]);
-Spec.add(\driveP, [10.0, 75.0, \exp]);
-Spec.add(\thresP, [0.15, 2.5, \exp]);
-// Spec.add(\ampP, [0.001, 3.5, \exp]);
-// Spec.add(\drive, [1.0, 2.0, \lin]);
-);
-
-c = ProxyChain(\tambs, [\tambs, \folD, \cliP]);
-
-//c.gui(20);
-// if specified, can be friendlier
-(
-g = c.gui(20)
-);
-);
-*/

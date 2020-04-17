@@ -14,29 +14,29 @@ SynthDef(\tunel, {| out = 0, t_trig=1, amp = 0.4, freq = 440, downsamp = 4, modF
 	OffsetOut.ar(out, son * amp);
 }, [\ir]).add;
 );
-q.vermelhodo.tunel = NPVoicer(Ndef(\tunelDo));
+q.vermelhodo.tunel = NPVoicer(Ndef(\tuneldo));
 q.vermelhodo.tunel.prime(\tunel);
-q.vermelhodo.tunel.play( Ndef(\vermelhodo).bus );
+q.vermelhodo.tunel.play();
 
-q.laranjare.tunel = NPVoicer(Ndef(\tunelRe));
+q.laranjare.tunel = NPVoicer(Ndef(\tunelre));
 q.laranjare.tunel.prime(\tunel);
-q.laranjare.tunel.play( Ndef(\laranjare).bus );
+q.laranjare.tunel.play();
 
-q.amarelomi.tunel = NPVoicer(Ndef(\tunelMi));
+q.amarelomi.tunel = NPVoicer(Ndef(\tunelmi));
 q.amarelomi.tunel.prime(\tunel);
-q.amarelomi.tunel.play( Ndef(\amarelomi).bus );
+q.amarelomi.tunel.play();
 
-q.verdefa.tunel = NPVoicer(Ndef(\tunelFa));
+q.verdefa.tunel = NPVoicer(Ndef(\tunelfa));
 q.verdefa.tunel.prime(\tunel);
-q.verdefa.tunel.play( Ndef(\verdefa).bus );
+q.verdefa.tunel.play();
 
-q.verdesol.tunel = NPVoicer(Ndef(\tunelSol));
+q.verdesol.tunel = NPVoicer(Ndef(\tunelsol));
 q.verdesol.tunel.prime(\tunel);
-q.verdesol.tunel.play( Ndef(\verdesol).bus );
+q.verdesol.tunel.play();
 
-q.lilassi.tunel = NPVoicer(Ndef(\tunelSi));
+q.lilassi.tunel = NPVoicer(Ndef(\tunelsi));
 q.lilassi.tunel.prime(\tunel);
-q.lilassi.tunel.play( Ndef(\lilassi).bus );
+q.lilassi.tunel.play;
 
 /*Ndef(\tunelDo, {| amp = 0.4, freq = 440, downsamp = 4, modFQ = 2, att = 2, rel = 4 |
 	var son = LFPulse.ar(freq);

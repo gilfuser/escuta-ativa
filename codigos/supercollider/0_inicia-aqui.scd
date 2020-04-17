@@ -11,7 +11,9 @@ q.verdesol = q.verdesol ? ();
 q.scale = Scale.at(\lydianMinor);
 
 // "teste-quark*".loadRelative;
-// Scale.at(\lydianMinor)
+
+// TODO: Improve MFdefs, pitch FX + q.scale-degreeToRatio
+
 s.waitForBoot({
 	/************** OSC OUT ********************/
 	q.net = NetAddr( /*"127.0.0.1"*/ "192.168.0.2", 12000); // IP e Port do Processing
