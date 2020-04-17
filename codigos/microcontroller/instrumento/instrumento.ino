@@ -19,7 +19,6 @@
   XCL     not connected
   AD0     not connected
   INT     D8 (GPIO15)   Interrupt pin
-
 */
 
 #if defined(ESP8266)
@@ -98,8 +97,8 @@ float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gra
 
 const char DEVICE_NAME[] = "mpu6050";
 
-const char* ssid = "skmecs-rede2"; // VARIÁVEL QUE ARMAZENA O NOME DA REDE SEM FIO
-const char* password = "12345678"; // 24378Skmecs VARIÁVEL QUE ARMAZENA A SENHA DA REDE SEM FIO
+const char* ssid = "NET_2.4G_Comunidade azul"; // VARIÁVEL QUE ARMAZENA O NOME DA REDE SEM FIO
+const char* password = "dunadeareia"; // 24378Skmecs VARIÁVEL QUE ARMAZENA A SENHA DA REDE SEM FIO
 
 WiFiUDP Udp;
 
@@ -113,7 +112,7 @@ WiFiUDP Udp;
 //                                AQUI
 //                                 V
 
-const IPAddress outIp(192, 168, 0, 101);  // ENDERECO IP DO COMPUTADOR
+const IPAddress outIp(192, 168, 0, 5);  // ENDERECO IP DO COMPUTADOR
 
 /////////////////////////////////////////////////////////////////////
 
@@ -136,7 +135,7 @@ WiFiServer server(80); //CASO OCORRA PROBLEMAS COM A PORTA 80, UTILIZE OUTRA (EX
 // ================================================================
 
 volatile bool mpuInterrupt = false;     // indicates whether MPU interrupt pin has gone high
-void dmpDataReady() {
+void ICACHE_RAM_ATTR dmpDataReady() {
   mpuInterrupt = true;
 }
 
