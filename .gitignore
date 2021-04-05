@@ -5,3 +5,4 @@ codes/processing-python/.DS_Store
 *.class
 *.DS_Store
 .DS_Store
+data-logs/

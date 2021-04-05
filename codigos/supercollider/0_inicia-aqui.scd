@@ -12,6 +12,41 @@ q.scale = Scale.at(\lydianMinor);
 
 // "teste-quark*".loadRelative;
 
+q.numChans = 2;
+s.waitForBoot({
+	q.postServerOptions;
+	q.pxmix = NdefMixer(s, 12);
+	q.pxmix.skipjack.dt = 0.05;
+	q.pxmix.moveTo(5, 5);
+	ProxyMeter.addMixer(q.pxmix);
+	s.scope(q.numChans).window.bounds_(Rect(700, 5, 261, 250));
+});
+p = Ndef.dictFor(s); // p.push;
+// put this into globals .. or use in the interfaces used!
+q.active = q.active ?? {()};
+q.isActive = { |q, obj| q.active.any(_.includes(obj)) };
+);
+(
+///////////    SOUNDS	  ///////////////////////
+// load some sound processes - put your own here
+"processes/melodiaSol*".loadRelative;
+"processes/dubba*".loadRelative;
+"processes/skmecsynth*".loadRelative;
+"processes/isaks_jetSet*".loadRelative;
+// or let sc choose some for you:
+/*
+"2_processes*.scd".resolveRelative.pathMatch.scramble.keep(4)
+.postcs.do(_.loadRelative);
+*/
+// get the loaded Ndefs by name
+// - change here to also get Tdefs, Pdefs
+// tell them to play, but keep amp at 0
+// q.ndefs = q.ndefs.reject({ |ndef| ndef.key==\dummy}); // clean up our dummy
+if( Ndef.dictFor(s).arProxyNames.includes(\dummy)){Ndef(\dummy).clear;};
+q.ndefs = q.getNdefs;
+q.ndefs.do {|ndef| ndef.set(\amp, 0).fadeTime_(1).play };
+);
+
 // TODO: Improve MFdefs, pitch FX + q.scale-degreeToRatio
 
 s.waitForBoot({
